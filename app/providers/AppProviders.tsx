@@ -1,9 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { LanguageProvider } from "./language-provider";
-import { IntroProvider } from "./intro-provider";
-import SmoothScroll from "./smooth-scroll-provider";
+import { LanguageProvider, IntroProvider, SmoothScroll } from "./";
 import CurtainLoader from "../ui/CurtainLoader";
 
 export function AppProviders({ children }: { children: ReactNode }) {
