@@ -38,7 +38,7 @@ const GridCell = ({ isVisible = true, animate, className, ...props }: GridCellPr
       {...props}
       initial={false}
       animate={mergedAnimate}
-      className={`border-2 md:border-3 border-current ${className || ""}`}
+      className={`${className || ""}`}
     />
   );
 };
@@ -64,7 +64,7 @@ export function NavIcon({ isOpen = false, onClick, className = "" }: CustomIcons
         return (
           <GridCell
             key={i}
-            className="size-1.5 md:size-2 lg:size-2.25 bg-zinc-800"
+            className="size-1.5 md:size-2 lg:size-2.25 bg-zinc-900"
             // Parzyste: znika (isVisible=false) gdy menu otwarte
             // Nieparzyste: zawsze widoczne (isVisible=true)
             isVisible={isEven ? !isOpen : true}
