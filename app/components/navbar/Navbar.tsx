@@ -39,8 +39,8 @@ export default function Navbar() {
     <header>
       <motion.div
         initial={false}
-        animate={introFinished ? { y: 0 } : { y: "-150%" }}
-        transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
+        animate={introFinished ? { y: 0 } : { y: -100 }}
+        transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
         /* Ręczny invert na hover, o którym pisałeś */
         className="fixed top-5 right-5 md:top-7 md:right-7 z-50 transition-all duration-700 bg-zinc-200 rounded-sm "
       >
