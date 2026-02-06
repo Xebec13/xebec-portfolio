@@ -64,7 +64,7 @@ export function NavIcon({ isOpen = false, onClick, className = "" }: CustomIcons
         return (
           <GridCell
             key={i}
-            className="size-2 bg-zinc-900"
+            className="size-1.5 md:size-2 lg:size-2.25 bg-zinc-800"
             // Parzyste: znika (isVisible=false) gdy menu otwarte
             // Nieparzyste: zawsze widoczne (isVisible=true)
             isVisible={isEven ? !isOpen : true}

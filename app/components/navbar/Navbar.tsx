@@ -18,7 +18,7 @@ export default function Navbar() {
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
 
   // Memoizujemy elementy nawigacji, aby nie przeliczać ich przy każdym toggleMenu
-  const navItems = useMemo(() => 
+  const navItems = useMemo(() =>
     GLOBAL.navLinks.map((link) => ({
       href: link.href,
       key: link.key,
@@ -41,7 +41,8 @@ export default function Navbar() {
         initial={false}
         animate={introFinished ? { y: 0 } : { y: "-150%" }}
         transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
-        className="fixed top-5 right-5 md:top-5 md:right-7 z-50"
+        /* Ręczny invert na hover, o którym pisałeś */
+        className="fixed top-5 right-5 md:top-7 md:right-7 z-50 transition-all duration-700 bg-zinc-200 rounded-sm "
       >
         <NavIcon isOpen={isOpen} onClick={toggleMenu} />
       </motion.div>
@@ -54,7 +55,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={toggleMenu}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30"
+              className="fixed inset-0 bg-neutral-900/30 backdrop-blur-sm z-30"
             />
 
             <motion.aside
