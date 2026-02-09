@@ -13,8 +13,7 @@ export default function IntroButtons({ onSelect }: IntroButtonsProps) {
   const { language } = useLanguage();
   const [hovered, setHovered] = useState<Language | null>(null);
 
-  // Priorytet ma hover, jeśli go nie ma - pokazujemy aktualnie wybrany język
-  const activeDisplay = hovered || language;
+  const activeDisplay = hovered ?? language ?? "en";
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -24,13 +23,13 @@ export default function IntroButtons({ onSelect }: IntroButtonsProps) {
 
       <div
         className="relative flex items-center bg-zinc-900/50 rounded-full p-1 w-48 h-12 backdrop-blur-sm shadow-inner cursor-pointer border border-zinc-800/50"
-        onMouseLeave={() => setHovered(null)}
+        onMouseLeave={() => setHovered("en")}
       >
         {/* Animated Slider */}
         <motion.div
           className="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-zinc-100 rounded-full shadow-md pointer-events-none"
           animate={{
-            x: activeDisplay === "en" ? "100%" : "0%",
+            x: activeDisplay === "pl" ? "0%" : "100%",
           }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
