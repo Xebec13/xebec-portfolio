@@ -77,7 +77,7 @@ export function NextChevron({ onClick, className = "" }: CustomIconsProps) {
       onClick={onClick}
       aria-label="Next slide"
       whileHover="hover"
-      className={`grid grid-cols-2 gap-1 p-1 transition-transform duration-300 hover:scale-110 cursor-pointer text-zinc-800/80 ${className}`}
+      className={`grid grid-cols-2 gap-1 p-1 transition-transform duration-300 hover:scale-110 cursor-pointer text-inherit ${className}`}
     >
       {[...Array(6)].map((_, i) => (
         <motion.div
@@ -88,7 +88,7 @@ export function NextChevron({ onClick, className = "" }: CustomIconsProps) {
             scale: hiddenIndices.includes(i) ? 0.5 : 1,
           }}
           variants={CHEVRON_MORPH_VARIANTS(1)}
-          className="size-2 bg-current"
+          className="size-1 md:size-1.5 bg-current"
         />
       ))}
     </motion.button>
@@ -106,7 +106,7 @@ export function PrevChevron({ onClick, className = "" }: CustomIconsProps) {
       onClick={onClick}
       aria-label="Previous slide"
       whileHover="hover"
-      className={`grid grid-cols-2 gap-1 p-1 transition-transform duration-300 hover:scale-110 cursor-pointer text-zinc-800/80 ${className}`}
+      className={`grid grid-cols-2 gap-1 p-1 transition-transform duration-300 hover:scale-110 cursor-pointer text-inherit ${className}`}
     >
       {[...Array(6)].map((_, i) => (
         <motion.div
@@ -117,7 +117,7 @@ export function PrevChevron({ onClick, className = "" }: CustomIconsProps) {
             scale: hiddenIndices.includes(i) ? 0.5 : 1,
           }}
           variants={CHEVRON_MORPH_VARIANTS(-1)}
-          className="size-2 bg-current"
+          className="size-1 md:size-1.5 bg-current"
         />
       ))}
     </motion.button>
@@ -150,7 +150,7 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
                 y: isOpen ? 3 : 0,
               }}
               transition={{ duration: 0.4, ease: SLIM_EASING }}
-              className="size-1 md:size-1.5 bg-current"
+              className="size-1 md:size-1.3 bg-current"
             />
           );
         }
@@ -166,7 +166,7 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
                 y: isOpen ? 0 : -3,
               }}
               transition={{ duration: 0.4, ease: SLIM_EASING }}
-              className="size-1 md:size-1.5 bg-current"
+              className="size-1 md:size-1.3 bg-current"
             />
           );
         }
@@ -179,7 +179,7 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
             animate={{
               opacity: isStaticHidden ? 0 : 1,
             }}
-            className="size-1 md:size-1.5 bg-current"
+            className="size-1 md:size-1.3 bg-current"
           />
         );
       })}

@@ -6,8 +6,7 @@ import { Work } from "@/app/constants/works";
 import TechIcon from "@/app/ui/TechIcon";
 import Divider from "@/app/ui/Divider";
 import { UpDownChevron } from "@/app/ui/CustomIcons";
-import WorksContentWrapper from "./WorksContentWrapper";
-import WorksDetails from "./WorksDetails"; // Nowy komponent
+import WorksDetails from "./WorksDetails";
 
 interface WorksItemProps {
     project: Work;
@@ -28,21 +27,21 @@ export default function WorksItem({ project, index }: WorksItemProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`grid grid-cols-3 p-4 md:p-5 gap-1 items-center w-full text-left cursor-pointer transition-colors duration-500
+                className={`grid grid-cols-3 min-h-5 max-h-15  py-5 px-3 gap-1 items-center w-full text-left cursor-pointer transition-colors duration-500
                         ${isExpanded
-                        ? "bg-zinc-200 text-neutral-900 hover:bg-neutral-900 hover:text-zinc-200" // State: Active/Expanded (Light theme match)
-                        : "bg-zinc-200 text-neutral-900 hover:bg-neutral-900 hover:text-zinc-200" // State: Default -> Hover (Inverted high contrast)
+                        ? "bg-zinc-200 text-neutral-900 hover:bg-neutral-900 hover:text-zinc-200"
+                        : "bg-zinc-200 text-neutral-900 hover:bg-neutral-900 hover:text-zinc-200"
                     }`}>
-                <span className="text-[clamp(0.8rem,0.8rem+0.6vw,3rem)] font-medium leading-none">
+                <span className={`text-[clamp(0.6rem,0.7rem+0.5vw,3rem)] font-medium leading-none whitespace-pre-line justify-self-start origin-left transition-[transform,margin] duration-500 ease-in-out ${isExpanded ? "scale-130 md:scale-130 ml-5" : "ml-0"}`}>
                     {project.name}
                 </span>
 
-                <div className={`justify-self-start flex items-center gap-3 md:gap-5 will-change-[opacity] transition-opacity duration-500 ${isExpanded ? "opacity-0" : "opacity-100"}`}>
+                <div className={`justify-self-start flex items-center gap-2 md:gap-5 will-change-[opacity] transition-opacity duration-500 ${isExpanded ? "opacity-0" : "opacity-100"}`}>
                     {project.techStack.map((tech) => (
                         <TechIcon
                             key={tech}
                             tech={tech}
-                            className="size-4 md:size-5" // Stały rozmiar kontenera dla każdego elementu
+                            className="size-3 md:size-5" // Stały rozmiar kontenera dla każdego elementu
                         />
                     ))}
                 </div>
@@ -53,10 +52,21 @@ export default function WorksItem({ project, index }: WorksItemProps) {
                 </span>
             </motion.button>
 
-            {/* Wykorzystujemy Twój sprawdzony mechanizm animacji */}
-            <WorksContentWrapper isExpanded={isExpanded}>
-                <WorksDetails project={project} />
-            </WorksContentWrapper>
+            <div
+                className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-700 ease-in-out ${isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                <WorksDetails
+                    marquee={project.keyWords}
+                    badges={project.techStack}
+                    review={project.review}
+                    techReview={project.techReview}
+                    achi={project.keyAchi}
+                    href={project.href}
+                    gitHref={project.gitHref}
+                    images={project.images}
+                    projectId={project.id}
+                // Tu w przyszłości dodasz kolejne: review={project.review} itd.
+                />
+            </div>
 
             <Divider type="main" />
         </>
