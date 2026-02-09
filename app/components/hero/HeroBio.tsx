@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, Variants } from "motion/react"; // Dodany import Variants
-import { useLanguage } from "../../providers/language-provider";
+import { motion, Variants } from "motion/react";
 
 const bioVariants: Variants = {
   hidden: { y: "150%" },
@@ -11,9 +10,12 @@ const bioVariants: Variants = {
   }
 };
 
-export default function HeroBio({ role }: { role: string }) {
-  const { t } = useLanguage();
+interface HeroBioProps {
+  role: string;
+  bio: string; // Nowy prop zamiast pobierania z contextu
+}
 
+export default function HeroBio({ role, bio }: HeroBioProps) {
   return (
     <div className="relative z-10 flex flex-col gap-5 items-start md:flex-row md:justify-between pointer-events-none">
       <div className="flex items-center p-3 font-semibold overflow-hidden">
@@ -24,7 +26,7 @@ export default function HeroBio({ role }: { role: string }) {
 
       <div className="shrink-0 text-[clamp(1.5rem,1rem+1.5vw,3rem)] indent-12 max-w-full md:max-w-1/2 font-medium text-justify leading-none overflow-hidden">
         <motion.p variants={bioVariants} className="whitespace-pre-line p-1.5">
-          {t.hero.bio}
+          {bio}
         </motion.p>
       </div>
     </div>

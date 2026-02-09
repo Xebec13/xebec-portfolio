@@ -8,7 +8,7 @@
 
 
 body {
-  @apply bg-zinc-200 text-neutral-950;
+  @apply bg-zinc-200 text-neutral-900;
   /* Fallbacki fontów */
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",

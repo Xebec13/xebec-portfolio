@@ -82,7 +82,7 @@ const footerData: Record<Language, DictionarySchema["footer"]> = {
     links: { github: "Github", linkedin: "Linkedin" },
   },
   pl: {
-    ctaTitle: "Ciekawi Cię, co możemy razem zbudować?",
+    ctaTitle: "Ciekawi Cię, co możemy razem zbudować?", 
     ctaSubtitle: "Rozwińmy Twój pomysł w coś ponadprzeciętnego!",
     btn: "Porozmawiajmy",
     status: "Gotowy do współpracy",
