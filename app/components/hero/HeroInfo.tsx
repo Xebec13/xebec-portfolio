@@ -43,7 +43,7 @@ export default function HeroInfo({ firstName, lastName, imgSrc }: HeroInfoProps)
 
       <motion.div
         variants={imgVariants}
-        className="relative z-30 shrink-0 h-45 w-45 md:size-55 lg:size-65 rounded-full pointer-events-auto overflow-hidden bg-zinc-200/90"
+        className="relative z-30 shrink-0 size-45 md:size-55 lg:size-65 rounded-full pointer-events-auto overflow-hidden bg-zinc-200/90"
       >
         <Image 
           src={imgSrc} 

@@ -4,10 +4,10 @@ import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { useLenis } from "lenis/react";
-import { NavIcon } from "../../ui/CustomIcons";
-import { useIntro } from "../../providers/intro-provider";
-import { useLanguage } from "../../providers/language-provider";
-import { GLOBAL } from "../../constants/portfolio";
+import { NavIcon } from "@/app/ui/CustomIcons";
+import { useIntro } from "@/app/providers/intro-provider";
+import { useLanguage } from "@/app/providers/language-provider";
+import { GLOBAL } from "@/app/constants/portfolio";
 
 export default function Navbar() {
   const { introFinished } = useIntro();
@@ -42,7 +42,7 @@ export default function Navbar() {
         animate={introFinished ? { y: 0 } : { y: -100 }}
         transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
         /* Ręczny invert na hover, o którym pisałeś */
-        className="fixed top-5 right-5 z-50 transition-all duration-700 bg-zinc-200 rounded-sm "
+        className="fixed top-3 right-3 z-50 transition-all duration-700 bg-zinc-200 rounded-sm "
       >
         <NavIcon isOpen={isOpen} onClick={toggleMenu} />
       </motion.div>
