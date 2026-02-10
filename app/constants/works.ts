@@ -202,7 +202,7 @@ export const WORKS_DATA: WorkProject[] = [
     techStack: ["nextjs", "tailwind", "ts", "motion"],
     images: ["/assets/pp1.png", "/assets/pp2.png", "/assets/pp3.png", "/assets/pp4.png"],
     href: "https://post-prime.netlify.app",
-    gitHref: "https://github.com/Xebec13/post-prime",
+    gitHref: "https://github.com/Xebec13/post-prime-podcast",
     content: {
       en: {
         review: "The goal was to solve the problem of fragmented content across different platforms. I created a unified hub that aggregates the client's social media activity (YouTube, Facebook, Instagram) into one automated space. No more manual updates — the site lives and breathes with the creator's content. The project is currently in the final stage of client review and evaluation.",

@@ -24,7 +24,7 @@ export default function HeroBio({ role, bio }: HeroBioProps) {
         </motion.p>
       </div>
 
-      <div className="shrink-0 text-[clamp(1.5rem,1rem+1.5vw,3rem)] indent-12 max-w-full md:max-w-1/2 font-medium text-justify leading-none overflow-hidden">
+      <div className="mt-20 lg:mt-0 shrink-0 text-[clamp(1.5rem,1rem+1.5vw,3rem)] indent-12 max-w-full md:max-w-1/2 font-medium text-justify leading-none overflow-hidden">
         <motion.p variants={bioVariants} className="whitespace-pre-line p-1.5">
           {bio}
         </motion.p>

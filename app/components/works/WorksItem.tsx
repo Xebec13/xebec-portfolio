@@ -27,7 +27,7 @@ export default function WorksItem({ project, index }: WorksItemProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`grid grid-cols-3 min-h-5 max-h-15  py-5 px-3 gap-1 items-center w-full text-left cursor-pointer transition-colors duration-500
+                className={`grid grid-cols-3 min-h-5 max-h-15  py-5 px-3 gap-1 place-items-center w-full text-left cursor-pointer transition-colors duration-500
                         ${isExpanded
                         ? "bg-zinc-200 text-neutral-900 hover:bg-neutral-900 hover:text-zinc-200"
                         : "bg-zinc-200 text-neutral-900 hover:bg-neutral-900 hover:text-zinc-200"
