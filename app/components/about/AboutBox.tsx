@@ -47,12 +47,10 @@ export default function AboutBox() {
                     <motion.button // ZMIANA: motion.button
                         key={item.id}
                         onClick={() => setActiveIdx(idx)}
-                        
                         // ZMIANA: Konfiguracja propagacji wariantów
                         variants={buttonVariants}
                         initial="initial"
                         whileHover="hover"
-
                         className="font-sansation group relative flex flex-col items-center justify-center gap-4 md:gap-6 p-3 md:p-10 shadow-[inset_0_0_0_3px_#171717] text-neutral-900 bg-transparent hover:text-zinc-50 hover:bg-neutral-900 transition-all duration-500 ease-out cursor-pointer"
                     >
                         {/* Wrapper dla ikony - zwykły div nie blokuje sygnału motion */}
@@ -125,19 +123,19 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
             className={`absolute group inset-0 z-20 flex flex-col bg-zinc-100 shadow-2xl overflow-hidden ${origins[index]}`}
         >
             {/* --- Header --- */}
-            <div className="flex items-center justify-between py-2 px-3 border-b border-inherit text-zinc-50 bg-neutral-800 shrink-0">
+            <div className="flex items-center justify-between px-3 py-2 border-b border-inherit min-h-15 max-h-15 text-zinc-50 bg-neutral-800">
                 <div className="flex items-center gap-3">
                     <BackChevron onClick={onClose} className="[&>div]:size-1.5 bg-transparent transition-colors ease-in-out duration-700 hover:bg-blue-600" />
-                    <h4 className="font-sansation text-lg md:text-xl font-bold uppercase tracking-wide leading-none">
+                    <h4 className="font-sansation font-bold uppercase tracking-wide leading-none">
                         {item.name}
                     </h4>
                 </div>
-                {/* Ikona w headerze też zareaguje na wariant 'hover' z overlayVariants */}
-                <div className="opacity-90">{icon}</div>
+                
+                <div className="opacity-90 scale-85">{icon}</div>
             </div>
 
             {/* --- Scrollable Content --- */}
-            <div className="p-4 md:p-6 space-y-8 overflow-y-auto overflow-x-hidden text-inherit scrollbar-thin scrollbar-thumb-zinc-400">
+            <div className="p-4 md:p-6 space-y-8 overflow-y-auto overflow-x-hidden text-inherit ">
 
                 {/* Sekcja 1: Badges */}
                 <div>
@@ -177,7 +175,7 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
 
 function ContentRenderer({ index, content }: { index: number, content: AboutSection['content'] }) {
 
-    // CASE 0: CODING
+    // CASE 0: CODING (Lista obiektów z linkami)
     if (index === 0) {
         return (
             <div className="space-y-6">
@@ -187,7 +185,8 @@ function ContentRenderer({ index, content }: { index: number, content: AboutSect
 
                     return (
                         <div key={i} className="bg-zinc-200 p-4 rounded-lg border border-zinc-300 shadow-sm">
-                            <div className="flex justify-between items-baseline mb-2 text-lg">
+                            {/* ZMIANA: Zmieniono text-lg na text-base dla spójności */}
+                            <div className="flex justify-between items-baseline mb-2 text-base">
                                 <a
                                     href={item.href}
                                     target="_blank"
@@ -197,7 +196,7 @@ function ContentRenderer({ index, content }: { index: number, content: AboutSect
                                     {item.name}
                                 </a>
                             </div>
-                            <p className="text-base text-inherit mb-3 leading-relaxed">{item.description}</p>
+                            <p className="text-sm text-inherit mb-3 leading-relaxed">{item.description}</p>
 
                             {item.contributions && (
                                 <ul className="space-y-1">
@@ -226,10 +225,11 @@ function ContentRenderer({ index, content }: { index: number, content: AboutSect
 
                     return (
                         <div key={i}>
-                            <p className="text-sm font-bold text-neutral-700 uppercase mb-2">{subTitle}</p>
-                            <div className="flex flex-wrap gap-4">
+                            {/* Tutaj jest text-sm */}
+                            <p className="text-sm font-bold text-neutral-700 uppercase mb-1">{subTitle}</p>
+                            <div className="flex flex-wrap gap-2 lg:gap-4">
                                 {block.map((txt, j) => (
-                                    <div key={j} className="flex items-center gap-4 text-sm text-zinc-800 font-medium">
+                                    <div key={j} className="flex items-center gap-2 lg:gap-4 text-sm text-zinc-800 font-medium">
                                         <span className="size-1.5 rounded-full bg-blue-700" />
                                         {txt}
                                     </div>
@@ -250,10 +250,11 @@ function ContentRenderer({ index, content }: { index: number, content: AboutSect
         if (!titles || !details) return null;
 
         return (
-            <div className="grid gap-4">
+            <div className="grid gap-2 lg:gap-4">
                 {titles.map((title, i) => (
                     <div key={i} className="bg-zinc-200 p-3 rounded border border-zinc-100">
-                        <p className="text-xs font-bold text-neutral-600 uppercase mb-1">{title}</p>
+                        {/* ZMIANA: Zwiększono z text-xs na text-sm dla lepszej czytelności */}
+                        <p className="text-sm font-bold text-neutral-600 uppercase mb-1">{title}</p>
                         <p className="text-sm text-neutral-950 leading-snug font-medium first-letter:capitalize">
                             {details[i]}
                         </p>
