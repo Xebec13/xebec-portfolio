@@ -32,7 +32,7 @@ export default function WorksItem({ project, index }: WorksItemProps) {
                         ? "bg-zinc-200 text-neutral-900 hover:bg-neutral-900 hover:text-zinc-200"
                         : "bg-zinc-200 text-neutral-900 hover:bg-neutral-900 hover:text-zinc-200"
                     }`}>
-                <span className={`text-[clamp(0.6rem,0.7rem+0.5vw,3rem)] font-medium leading-none whitespace-pre-line justify-self-start origin-left transition-[transform,margin] duration-500 ease-in-out ${isExpanded ? "scale-130 md:scale-130 ml-5" : "ml-0"}`}>
+                <span className={`text-[clamp(0.8rem,0.9rem+0.5vw,3rem)] font-medium leading-none whitespace-pre-line justify-self-start origin-left transition-[transform,margin] duration-500 ease-in-out ${isExpanded ? "scale-130 md:scale-130 ml-5" : "ml-0"}`}>
                     {project.name}
                 </span>
 

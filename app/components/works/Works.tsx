@@ -15,9 +15,9 @@ export default function Works() {
   const projects = getWorks(language);
 
   return (
-    <section id="works" className="min-h-screen p-5 md:p-15 bg-zinc-200 text-neutral-900">
+    <section id="works" className="min-h-screen">
       
-      <div className="font-sansation grid grid-cols-2 lg:grid-cols-3 p-2 gap-3 font-semibold uppercase text-lg lg:text-2xl">
+      <div className="font-sansation grid grid-cols-2 lg:grid-cols-3 p-1 gap-3 font-semibold uppercase text-lg lg:text-2xl">
         <p className="justify-self-start ">{t.projects.headerProject}</p>
         <p className="justify-self-start hidden lg:block">{t.projects.headerTech}</p>
         <p className="justify-self-end">{t.projects.headerDate}</p>

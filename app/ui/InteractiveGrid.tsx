@@ -1,38 +1,31 @@
 "use client";
 
 import { useState, useEffect, memo } from "react";
-import { motion, Variants } from "motion/react"; // Dodajemy motion i Variants
+import { motion} from "motion/react";
 
-const FADE_DURATION = 700;
-const TOTAL_CELLS = 100;
+interface InteractiveGridProps {
+  totalCells?: number;
+  duration?: number;
+  className?: string; // Dodałem ten opcjonalny prop, to standard w React
+}
 
-// Warianty dla wejścia całego gridu
-const gridVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1, 
-    transition: { 
-      duration: 1, 
-      delay: 0.2, // To jest Twoje opóźnienie względem tekstów Hero
-      ease: "easeOut" 
-    } 
-  }
-};
 
-const GridCell = memo(() => {
+
+const GridCell = memo(({ duration }: { duration: number }) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     if (!isActive) return;
-    const timeout = setTimeout(() => setIsActive(false), FADE_DURATION);
+    const timeout = setTimeout(() => setIsActive(false), duration);
     return () => clearTimeout(timeout);
-  }, [isActive]);
+  }, [isActive, duration]);
 
   return (
     <div
       onMouseEnter={() => setIsActive(true)}
+      style={{ transitionDuration: `${duration}ms` }}
       className={`
-        w-full aspect-square transition-all duration-700 ease-out
+        w-full h-full aspect-square transition-all ease-out
         transform-gpu grow-0 shrink-0 will-change-[backdrop-filter]
         ${isActive ? "backdrop-invert" : "backdrop-invert-0"}
       `}
@@ -42,16 +35,21 @@ const GridCell = memo(() => {
 
 GridCell.displayName = "GridCell";
 
-export default function InteractiveGrid() {
+export default function InteractiveGrid({ 
+  totalCells = 10, 
+  duration = 700,
+  className = "" // Domyślnie pusty string
+}: InteractiveGridProps) {
+  
   return (
     <motion.div
       aria-hidden="true"
-      /* Podpinamy warianty - teraz grid "poczeka" na sygnał z MainAnimationGate */
-      variants={gridVariants}
-      className="hidden md:grid absolute inset-0 z-20 w-full h-full md:grid-cols-5 lg:grid-cols-10 overflow-hidden pointer-events-auto"
+      // WAŻNE: Dodaję ${className} NA KOŃCU. 
+      // Dzięki temu jeśli podasz "grid-cols-5", nadpisze ono domyślne "lg:grid-cols-10"
+      className={`hidden md:grid absolute inset-0 z-20 w-full h-full grid-cols-5 lg:grid-cols-10 overflow-hidden pointer-events-auto ${className}`}
     >
-      {Array.from({ length: TOTAL_CELLS }).map((_, i) => (
-        <GridCell key={i} />
+      {Array.from({ length: totalCells }).map((_, i) => (
+        <GridCell key={i} duration={duration} />
       ))}
     </motion.div>
   );
