@@ -12,10 +12,15 @@ import {
     BackChevron
 } from "@/app/ui/CustomIcons";
 
-
 // ==========================================================================
 // 1. MAIN COMPONENT: AboutBox
 // ==========================================================================
+
+// Warianty dla przycisku - puste, ale konieczne do przekazania sygnału w dół do ikon
+const buttonVariants = {
+    initial: {},
+    hover: {}
+};
 
 export default function AboutBox() {
     const [activeIdx, setActiveIdx] = useState<number | null>(null);
@@ -39,17 +44,26 @@ export default function AboutBox() {
             {/* --- GRID BUTTONS (TŁO) --- */}
             <div className="grid grid-cols-2 gap-1 size-full min-h-100 lg:min-h-150">
                 {aboutData.map((item, idx) => (
-                    <button
+                    <motion.button // ZMIANA: motion.button
                         key={item.id}
                         onClick={() => setActiveIdx(idx)}
-                        className="font-sansation group relative flex flex-col items-center justify-center gap-4 md:gap-6 p-3 md:p-10 shadow-[inset_0_0_0_3px_#171717] text-neutral-900 bg-transparent hover:text-zinc-50 hover:bg-neutral-900 transition-all duration-500 ease-out cursor-pointer">
-                        <div className="">
+                        
+                        // ZMIANA: Konfiguracja propagacji wariantów
+                        variants={buttonVariants}
+                        initial="initial"
+                        whileHover="hover"
+
+                        className="font-sansation group relative flex flex-col items-center justify-center gap-4 md:gap-6 p-3 md:p-10 shadow-[inset_0_0_0_3px_#171717] text-neutral-900 bg-transparent hover:text-zinc-50 hover:bg-neutral-900 transition-all duration-500 ease-out cursor-pointer"
+                    >
+                        {/* Wrapper dla ikony - zwykły div nie blokuje sygnału motion */}
+                        <div className="relative z-10 transition-transform duration-300 group-hover:scale-110">
                             {getIcon(idx)}
                         </div>
-                        <h3 className="text-sm md:text-base lg:text-lg font-bold uppercase tracking-wide">
+                        
+                        <h3 className="relative z-10 text-sm md:text-base lg:text-lg font-bold uppercase tracking-wide">
                             {item.name}
                         </h3>
-                    </button>
+                    </motion.button>
                 ))}
             </div>
 
@@ -83,7 +97,7 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
 
     // Style Badge'y zależnie od sekcji (Coding, Prof, Learning, Personal)
     const badgeStyles = [
-        "bg-neutral-500/30 text-zinc-950 border-zinc-500", // Coding (bez zmian)
+        "bg-neutral-500/30 text-zinc-950 border-zinc-500", // Coding
         "bg-neutral-500/20 text-zinc-900 border-blue-950", // Professional
         "bg-neutral-500/10 text-zinc-900 border-zinc-400", // Learning
         "bg-neutral-400/30 text-zinc-950 border-blue-900", // Personal
@@ -93,32 +107,40 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
 
     // Definiujemy, skąd ma "wyjechać" overlay (transform origin)
     const origins = ["origin-top-left", "origin-top-right", "origin-bottom-left", "origin-bottom-right"];
+    
+    // Warianty Overlayu
+    const overlayVariants = {
+        initial: { opacity: 0, scale: 0.9 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.95 },
+    };
 
     return (
         <motion.div
             data-lenis-prevent="true"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className={`absolute inset-0 z-20 flex flex-col bg-zinc-100 shadow-2xl overflow-hidden ${origins[index]}`}
+            variants={overlayVariants} 
+            initial="initial"           
+            animate="animate"
+            exit="exit"
+            className={`absolute group inset-0 z-20 flex flex-col bg-zinc-100 shadow-2xl overflow-hidden ${origins[index]}`}
         >
             {/* --- Header --- */}
-            <div className="flex items-center justify-between py-2 px-3 border-b border-inherit text-zinc-50 bg-neutral-800">
+            <div className="flex items-center justify-between py-2 px-3 border-b border-inherit text-zinc-50 bg-neutral-800 shrink-0">
                 <div className="flex items-center gap-3">
-                    <BackChevron onClick={onClose} className="bg-transparent transition-colors ease-in-out duration-700 hover:bg-blue-600" />
-                    <h4 className="font-sansation text-lg md:text-xl font-bold uppercase tracking-wide leading-0 ">
+                    <BackChevron onClick={onClose} className="[&>div]:size-1.5 bg-transparent transition-colors ease-in-out duration-700 hover:bg-blue-600" />
+                    <h4 className="font-sansation text-lg md:text-xl font-bold uppercase tracking-wide leading-none">
                         {item.name}
                     </h4>
                 </div>
+                {/* Ikona w headerze też zareaguje na wariant 'hover' z overlayVariants */}
                 <div className="opacity-90">{icon}</div>
             </div>
 
             {/* --- Scrollable Content --- */}
-            <div className="p-4 md:p-6 space-y-8 overflow-y-auto overflow-x-hidden text-inherit">
+            <div className="p-4 md:p-6 space-y-8 overflow-y-auto overflow-x-hidden text-inherit scrollbar-thin scrollbar-thumb-zinc-400">
 
-                {/* Sekcja 1: Badges (Zawsze taka sama) */}
-                <div className="" >
+                {/* Sekcja 1: Badges */}
+                <div>
                     <p className="text-base font-bold uppercase mb-3 tracking-wider">
                         {item.headings[0]}
                     </p>
@@ -134,16 +156,14 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
                     </div>
                 </div>
 
-                {/* Sekcja 2: Dynamic Content (Różne layouty) */}
+                {/* Sekcja 2: Dynamic Content */}
                 <div>
-                    {/* Opcjonalny drugi nagłówek, jeśli istnieje */}
                     {item.headings[1] && (
                         <p className="text-base font-bold uppercase mb-3 tracking-wider">
                             {item.headings[1]}
                         </p>
                     )}
 
-                    {/* Renderer właściwej treści */}
                     <ContentRenderer index={index} content={item.content} />
                 </div>
             </div>
@@ -157,12 +177,11 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
 
 function ContentRenderer({ index, content }: { index: number, content: AboutSection['content'] }) {
 
-    // CASE 0: CODING (Lista obiektów z linkami)
+    // CASE 0: CODING
     if (index === 0) {
         return (
             <div className="space-y-6">
                 {content.map((entry, i) => {
-                    // Type Guard: Upewniamy się, że to obiekt AboutContentItem
                     if (typeof entry === 'string' || Array.isArray(entry)) return null;
                     const item = entry as AboutContentItem;
 
@@ -197,15 +216,12 @@ function ContentRenderer({ index, content }: { index: number, content: AboutSect
         );
     }
 
-    // CASE 1: PROFESSIONAL (Dwie tablice: Segmenty + Kompetencje)
-    // W about.ts: items[0] = lista segmentów, items[1] = lista kompetencji
+    // CASE 1: PROFESSIONAL
     if (index === 1) {
         return (
             <div className="space-y-6">
                 {content.map((block, i) => {
                     if (!Array.isArray(block)) return null;
-
-                    // Nagłówki dla tych podsekcji (możesz je pobrać z headings lub zahardcodować jeśli są stałe strukturalnie)
                     const subTitle = i === 0 ? "Segments / Industries" : "Key Competences";
 
                     return (
@@ -226,8 +242,7 @@ function ContentRenderer({ index, content }: { index: number, content: AboutSect
         )
     }
 
-    // CASE 2 & 3: LEARNING & PERSONAL (Pary Tablic: Tytuł -> Opis)
-    // W about.ts: items[0] = Tytuły, items[1] = Opisy
+    // CASE 2 & 3: LEARNING & PERSONAL
     if (index === 2 || index === 3) {
         const titles = content[0] as string[];
         const details = content[1] as string[];

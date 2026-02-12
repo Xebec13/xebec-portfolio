@@ -6,7 +6,7 @@ import { motion} from "motion/react";
 interface InteractiveGridProps {
   totalCells?: number;
   duration?: number;
-  className?: string; // Dodałem ten opcjonalny prop, to standard w React
+  className?: string; 
 }
 
 
@@ -44,8 +44,7 @@ export default function InteractiveGrid({
   return (
     <motion.div
       aria-hidden="true"
-      // WAŻNE: Dodaję ${className} NA KOŃCU. 
-      // Dzięki temu jeśli podasz "grid-cols-5", nadpisze ono domyślne "lg:grid-cols-10"
+      
       className={`hidden md:grid absolute inset-0 z-20 w-full h-full grid-cols-5 lg:grid-cols-10 overflow-hidden pointer-events-auto ${className}`}
     >
       {Array.from({ length: totalCells }).map((_, i) => (

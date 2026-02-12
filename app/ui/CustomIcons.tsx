@@ -1,7 +1,7 @@
 "use client";
 
-import { motion} from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { motion,useMotionValue, useSpring } from "motion/react";
+import { useEffect, useRef } from "react";
 
 // ==========================================
 // Types & Shared Constants
@@ -130,13 +130,13 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
   const staticHidden = [0, 2, 4, 6, 8];
 
   return (
-    <div 
-      className={`grid grid-cols-3 gap-0.5  text-current ${className}`} 
+    <div
+      className={`grid grid-cols-3 gap-0.5  text-current ${className}`}
       aria-hidden="true"
     >
       {[...Array(9)].map((_, i) => {
         const isStaticHidden = staticHidden.includes(i);
-        
+
         // Logika dla animowanego punktu górnego
         if (i === 1) {
           return (
@@ -186,217 +186,330 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
 }
 
 
-// 5. General Back Button (Modal/Navigation)
-export function BackChevron({ onClick,className="", }: CustomIconsProps) {
+// 5. General Back Button
+export function BackChevron({ onClick, className = "" }: CustomIconsProps) {
+  // Indeksy tworzące strzałkę <
+  const visibleCells = [1, 3, 7];
+
   return (
     <button
       onClick={onClick}
       aria-label="Go back"
-      className="cursor-pointer"
+      className="group cursor-pointer shrink-0"
     >
-      <div className={`grid grid-cols-3 p-1 gap-1 cursor-pointer ${className}`}>
+      <div
+        className={`
+          grid grid-cols-3 gap-0.5 p-1 
+          transition-all duration-500 ease-in-out
+          [&>div]:size-1  
+          ${className}
+        `}
+      >
         {[...Array(9)].map((_, i) => (
-          <div key={i} className="border-2 border-inherit" />
+          <div
+            key={i}
+            className={`
+              border-2 border-inherit transition-opacity bg-current
+              ${!visibleCells.includes(i) ? "opacity-0" : "opacity-100"}
+            `}
+          />
         ))}
       </div>
     </button>
   );
 }
 
-// 6. Footer Specific Action (Scroll to Top / Close Contact)
-export function FooterBackChevron({ onClick }: CustomIconsProps) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label="Scroll to top"
-      // Positioned absolutely within the footer/modal context
-      className="chevron-footer-back absolute top-5 left-5 grid grid-cols-3 gap-1 p-1 cursor-pointer bg-transparent transition-colors ease-in-out duration-700 hover:bg-zinc-400"
-    >
-      {[...Array(9)].map((_, i) => (
-        <div key={i} className="border-2" />
-      ))}
-    </button>
-  );
-}
+const BRACKET_LEFT_MAP = [1, 3, 7];
+const BRACKET_RIGHT_MAP = [1, 5, 7];
 
-// 7. Coding Icon (</>) - Composite of 3 grids
-export function CodingIcon({ onClick }: CustomIconsProps) {
+export function CodingIcon({ className = "" }: { className?: string }) {
   return (
-    <div
-      onClick={onClick}
-      className="group flex items-center gap-3 cursor-pointer"
-      aria-label="Code symbol"
-    >
-      {/* Left Bracket (<) - 2x3 Grid */}
-      <div className="grid grid-cols-3 gap-1">
+    <div className={`flex items-center gap-0.5 shrink-0 ${className}`}>
+      {/* LEWY NAWIAS < */}
+      <motion.div
+        variants={{
+          initial: { x: 5 },
+          hover: { x: 0 }
+        }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="grid grid-cols-3 gap-0.5 p-1"
+      >
         {[...Array(9)].map((_, i) => (
-          <div key={i} className="border-inherit border-2" />
+          <div
+            key={i}
+            className={`size-1.5 border-2 border-inherit bg-current transition-opacity ${
+              BRACKET_LEFT_MAP.includes(i) ? "opacity-100" : "opacity-0"
+            }`}
+          />
         ))}
-      </div>
+      </motion.div>
 
-      {/* Slash (/) - 3x3 Grid */}
-      <div className="grid grid-cols-1 gap-1">
+      {/* SLASH / */}
+      <motion.div
+        variants={{
+          initial: { rotate: 25, scale: 1 },
+          hover: { rotate: 0, scale: 0.9 }
+        }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="flex flex-col gap-0.5 p-1"
+      >
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="border-inherit border-2" />
+          <motion.div
+            key={i}
+            variants={{
+              initial: { opacity: 1 },
+              hover: { 
+                opacity: [1, 0, 1],
+                transition: { 
+                  duration: 1.5, 
+                  repeat: Infinity, 
+                  delay: (5 - i) * 0.1 
+                }
+              }
+            }}
+            className="size-1.5 border-2 border-inherit bg-current"
+          />
         ))}
-      </div>
+      </motion.div>
 
-      {/* Right Bracket (>) - 2x3 Grid */}
-      <div className="grid grid-cols-3 gap-1">
+      {/* PRAWY NAWIAS > */}
+      <motion.div
+        variants={{
+          initial: { x: -5 },
+          hover: { x: 0 }
+        }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="grid grid-cols-3 gap-0.5 p-1"
+      >
         {[...Array(9)].map((_, i) => (
-          <div key={i} className="border-inherit border-2" />
+          <div
+            key={i}
+            className={`size-1.5 border-2 border-inherit bg-current transition-opacity ${
+              BRACKET_RIGHT_MAP.includes(i) ? "opacity-100" : "opacity-0"
+            }`}
+          />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
 
 // 8. Professional Icon (Lock / Briefcase structure)
-export function ProfIcon({ onClick }: CustomIconsProps) {
+export function ProfIcon({ className = "" }: { className?: string }) {
   return (
-    <div
-      onClick={onClick}
-      aria-label="Professional skills"
-      className="group relative flex items-center justify-center cursor-pointer size-8"
-    >
-      {/* 
-        Grid 4 columns x 4 rows = 16 cells.
-        Using gap-1 to ensure it fits well within the size-9 container.
-      */}
-      <div className="relative size-full grid grid-cols-4 gap-0.5">
-        {[...Array(16)].map((_, i) => (
-          <div
-            key={i}
-            className="border-2 border-inherit"
-          />
-        ))}
+    <div className={`flex items-center p-1 ${className}`}>
+      <div className="grid grid-cols-4 gap-0.5">
+        {[...Array(16)].map((_, i) => {
+          // Logika podziału elementów walizki
+          const isHidden = i === 0 || i === 3;
+          const isHandle = i === 1 || i === 2;
+          const isLock = i === 9 || i === 10; // Środek walizki
+
+          return (
+            <motion.div
+              key={i}
+              variants={{
+                initial: { 
+                  y: 0, 
+                  opacity: isHidden ? 0 : 1,
+                  scale: 1,
+                  
+                },
+                hover: {
+                  // Rączka idzie do góry (-4px), reszta zostaje (0)
+                  y: isHandle ? -4 : 0, 
+                  // Zamek lekko się kurczy, imitując mechanizm
+                  scale: isLock ? 0.85 : 1,
+                  // Jeśli odkomentowałeś backgroundColor wyżej, tu daj: "currentColor"
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 400, 
+                    damping: 20,
+                    delay: isHandle ? 0 : i * 0.02 // Delikatny stagger dla korpusu
+                  }
+                }
+              }}
+              className={`
+                size-1.5 border-2 border-inherit bg-current
+            
+                ${i === 1 ? "rounded-tl-sm" : ""}
+                ${i === 2 ? "rounded-tr-sm" : ""}
+                
+                ${i === 12 ? "rounded-bl-xs" : ""}
+                ${i === 15 ? "rounded-br-xs" : ""}
+              `}
+            />
+          );
+        })}
       </div>
     </div>
   );
 }
 
 // 9. Certificate Icon (Lock)
-export function CertIcon({ onClick }: CustomIconsProps) {
+export function CertIcon({ className = "" }: { className?: string }) {
   return (
-    <div
-      onClick={onClick}
-      aria-label="Professional skills"
-      className="cert-icon gruop flex flex-col items-center justify-center cursor-pointer"
-    >
+    <div className={`flex flex-col items-center justify-center cursor-pointer p-1 ${className}`}>
+      
+      {/* --- SHACKLE (Ucho kłódki) --- */}
+      <motion.div
+        variants={{
+          initial: { y: 0, rotateY: 0 },
+          hover: {
+            // Sekwencja: 
+            // 1. Dół (3px) - symulacja wciśnięcia
+            // 2. Góra (-6px) + Obrót (180deg) - otwarcie
+            y: [0, 3, -6],
+            rotateY: [0, 0, 180], 
+            transition: {
+              duration: 0.8,
+              // Times definiuje momenty w czasie (0%, 40%, 100%)
+              times: [0, 0.4, 1], 
+              ease: "easeInOut" // Lub [0.68, -0.55, 0.265, 1.55] dla efektu bounce
+            }
+          }
+        }}
+        // Punkt obrotu: Prawy dolny róg (jak zawias)
+        className="w-3 h-2.5 border-[2.5px] border-b-0 border-inherit rounded-t-full origin-bottom-right"
+      />
 
-      <div className="lock-icon w-3 h-2 border-[2.5px] border-b-0 border-inherit rounded-t-full" />
-
-      {/* THE BODY (Lock Body - 3x3 Grid) */}
-      <div className="grid grid-cols-3 gap-1 p-0.5">
+      {/* --- BODY (Korpus 3x3) --- */}
+      <motion.div
+        variants={{
+          initial: { scaleY: 1 },
+          hover: {
+            // Sekwencja: Zgniecenie (0.9) gdy ucho idzie w dół, powrót (1) gdy wyskakuje
+            scaleY: [1, 0.9, 1],
+            transition: {
+              duration: 0.8,
+              times: [0, 0.4, 1],
+              ease: "easeInOut"
+            }
+          }
+        }}
+        className="grid grid-cols-3 gap-0.5 p-0.5"
+      >
         {[...Array(9)].map((_, i) => (
           <div
             key={i}
-            className="border-2 border-inherit"
+            className={`
+              size-1.5 border-2 border-inherit 
+              ${i === 4 ? "border-transparent bg-transparent" : "bg-current"}
+            `}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
-
 }
 // ==========================================
 // 10. Personal Icon (Interactive Face)
-// ==========================================
-export function PersonalIcon({ onClick }: CustomIconsProps) {
-  const [pupilPos, setPupilPos] = useState({ x: 0, y: 0 });
+export function PersonalIcon({ className = "" }: { className?: string }) {
   const faceRef = useRef<HTMLDivElement>(null);
 
+  // 1. Motion Values: Zmienne, które nie powodują re-renderu komponentu
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // 2. Sprężystość: Dzięki temu ruch gałek będzie płynny i naturalny
+  const springX = useSpring(x, { stiffness: 300, damping: 30 });
+  const springY = useSpring(y, { stiffness: 300, damping: 30 });
+
   useEffect(() => {
-    const handleGlobalMouseMove = (e: MouseEvent) => {
-      // 1. Ensure we have the face reference
+    // Funkcja obliczająca pozycję
+    const handleMouseMove = (e: MouseEvent) => {
       if (!faceRef.current) return;
 
-      // 2. Find the parent button (with 'group' class)
-      // This avoids changing parent code!
-      const parentButton = faceRef.current.closest('.eye-ref');
-
+      // Szukamy przycisku-rodzica (klasa .group z AboutBox)
+      const parentButton = faceRef.current.closest(".group");
       if (!parentButton) return;
 
-      // 3. Check if mouse is hovering the button
       const btnRect = parentButton.getBoundingClientRect();
-      const isHoveringButton =
+      
+      // Sprawdzamy, czy myszka jest nad przyciskiem
+      const isHovering =
         e.clientX >= btnRect.left &&
         e.clientX <= btnRect.right &&
         e.clientY >= btnRect.top &&
         e.clientY <= btnRect.bottom;
 
-      // 4. If hovering button -> Move eyes
-      if (isHoveringButton) {
-        // --- Eye position logic (relative to face center, not button) ---
+      if (isHovering) {
+        // Obliczamy środek twarzy
         const faceRect = faceRef.current.getBoundingClientRect();
-        const faceCenterX = faceRect.left + faceRect.width / 2;
-        const faceCenterY = faceRect.top + faceRect.height / 2;
+        const centerX = faceRect.left + faceRect.width / 2;
+        const centerY = faceRect.top + faceRect.height / 2;
 
-        const deltaX = e.clientX - faceCenterX;
-        const deltaY = e.clientY - faceCenterY;
+        const deltaX = e.clientX - centerX;
+        const deltaY = e.clientY - centerY;
 
+        // Matematyka kątów (dokładnie Twoja logika)
         const angle = Math.atan2(deltaY, deltaX);
-        // Distance: Limit movement to 3px (radius inside the eye white)
-        const distance = Math.min(3, Math.hypot(deltaX, deltaY) / 8);
+        const distance = Math.min(2.5, Math.hypot(deltaX, deltaY) / 8); // Max przesunięcie 2.5px
 
-        setPupilPos({
-          x: Math.cos(angle) * distance,
-          y: Math.sin(angle) * distance,
-        });
+        // Aktualizujemy MotionValues (bez re-renderu Reacta!)
+        x.set(Math.cos(angle) * distance);
+        y.set(Math.sin(angle) * distance);
       } else {
-        // 5. If mouse leaves button -> Reset eyes
-        setPupilPos({ x: 0, y: 0 });
+        // Reset do środka
+        x.set(0);
+        y.set(0);
       }
     };
 
-    // Attach listener to window
-    window.addEventListener("mousemove", handleGlobalMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [x, y]);
 
-    // Cleanup function
-    return () => {
-      window.removeEventListener("mousemove", handleGlobalMouseMove);
-    };
-  }, []); // Empty dependency array = runs once on mount
+  // Mapa kratek do ukrycia (rogi + miejsce na oczy/usta)
+  // Grid 5x4 = 20 kratek (0-19)
+  const HIDDEN_INDICES = [
+    0, 4,              // Rogi góra
+    6, 7, 8,           // Oczy
+    11, 12, 13,        // Nos/Środek
+    15, 19             // Rogi dół
+  ];
 
   return (
     <div
       ref={faceRef}
-      onClick={onClick}
-      // Removed onMouseMove/onMouseLeave here, handled by useEffect
+      className={`relative flex items-center justify-center size-10 ${className}`}
       aria-label="Personal interests"
-      className="personal-icon group relative flex items-center justify-center cursor-pointer size-9"
     >
-
-      <div className="smile-icon right-0.5 relative size-full grid grid-cols-5 gap-2">
+      {/* --- GRID (Twarz) --- */}
+      <div className="grid grid-cols-5 gap-2 size-full">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="border-2 bg-inherit"
+            className={`
+              size-1 border-2 border-inherit bg-current transition-opacity
+              ${HIDDEN_INDICES.includes(i) ? "opacity-0" : "opacity-100"}
+            `}
           />
         ))}
       </div>
 
-
-      {/* EYES */}
-      <div className="absolute top-[25%] w-full flex justify-center gap-1.5 px-1">
-        {/* Left */}
-        <div className="relative size-2.5 bg-white border border-inherit rounded-full flex items-center justify-center overflow-hidden">
-          <div
-            className="w-1 h-1 bg-blue-500 rounded-full transition-transform duration-100 ease-out"
-            style={{ transform: `translate(${pupilPos.x}px, ${pupilPos.y}px)` }}
-          />
+      {/* --- EYES & MOUTH Container --- */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center  pointer-events-none">
+        
+        {/* OCZY */}
+        <div className="flex gap-1 ml-0.5 mb-1.5">
+          {/* Lewe Oko */}
+          <div className="relative size-2.5 bg-blue-100 border-2 border-inherit rounded-full flex items-center justify-center overflow-hidden">
+            <motion.div
+              style={{ x: springX, y: springY }}
+              className="size-1 bg-blue-900 rounded-full "
+            />
+          </div>
+          {/* Prawe Oko */}
+          <div className="relative size-2.5 bg-blue-100 border-2 border-inherit rounded-full flex items-center justify-center overflow-hidden">
+            <motion.div
+              style={{ x: springX, y: springY }}
+              className="size-1 bg-blue-900 rounded-full "
+            />
+          </div>
         </div>
-        {/* Right */}
-        <div className="relative size-2.5 bg-white border border-inherit rounded-full flex items-center justify-center overflow-hidden">
-          <div
-            className="w-1 h-1 bg-blue-500 rounded-full transition-transform duration-100 ease-out"
-            style={{ transform: `translate(${pupilPos.x}px, ${pupilPos.y}px)` }}
-          />
-        </div>
-        <div className="absolute -bottom-2.5 h-0.5 w-1/3 bg-inherit rounded-full"/>
+        <div className="ml-0.5 w-4 h-1 border-b-2 border-inherit rounded-full opacity-80" />
       </div>
     </div>
-
-
   );
 }
