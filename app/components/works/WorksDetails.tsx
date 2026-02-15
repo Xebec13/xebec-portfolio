@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
@@ -29,33 +29,33 @@ export default function WorksDetails({
 
       {/* --- RZĄD 1: Marquee & Badges --- */}
       <div className="row-start-1 lg:col-start-1">
-        <HeroMarquee words={marquee} id={projectId} />
+        <Marquee words={marquee} id={projectId} />
       </div>
 
       <div className="lg:col-start-2 lg:col-span-2 flex items-center">
-        <HeroBadges items={badges} />
+        <Badges items={badges} />
       </div>
 
       {/* --- RZĄD 2: Opisy (Review & Tech) --- */}
       <div className="row-start-2 lg:row-start-2 lg:col-start-1">
-        <HeroReview review={review} />
+        <Review review={review} />
       </div>
 
       <div className="lg:row-start-2 lg:col-start-2 lg:col-span-2">
-        <HeroTechReview techReview={techReview} />
+        <TechReview techReview={techReview} />
       </div>
 
       {/* --- RZĄD 3 & 4: Osiągnięcia, Linki oraz Karuzela --- */}
       <div className="lg:row-start-3 lg:col-start-1">
-        <HeroAchi keyAchi={achi} />
+        <Achi keyAchi={achi} />
         <div className="mt-10">
-          <HeroLinks href={href} gitHref={gitHref} />
+          <Links href={href} gitHref={gitHref} />
         </div>
       </div>
 
       {/* Karuzela zajmuje dwie kolumny i rozciąga się przez dwa rzędy na desktopie */}
       <div className="lg:col-start-2 lg:col-span-2 lg:row-start-3  self-center">
-        <HeroCarousel images={images} />
+        <Carousel images={images} />
       </div>
 
     </div>
@@ -68,7 +68,7 @@ export default function WorksDetails({
 
 /** * [ROW 1] HeroMarquee: Płynny pasek słów kluczowych 
  */
-function HeroMarquee({ words, id }: { words: string[], id: number }) {
+function Marquee({ words, id }: { words: string[], id: number }) {
   return (
     <ul className="key-font flex items-center shrink-0 max-w-full text-blue-600 text-xs md:text-sm uppercase whitespace-nowrap overflow-hidden">
       <motion.div
@@ -92,7 +92,7 @@ function HeroMarquee({ words, id }: { words: string[], id: number }) {
 
 /** * [ROW 1] HeroBadges: Pigułki technologiczne (napisy) 
  */
-function HeroBadges({ items }: { items: string[] }) {
+function Badges({ items }: { items: string[] }) {
   return (
     <ul className="flex flex-wrap items-center gap-2 text-sm font-semibold uppercase">
       {items.map((techName, idx) => (
@@ -109,7 +109,7 @@ function HeroBadges({ items }: { items: string[] }) {
 
 /** * [ROW 2] HeroReview: Główny opis projektu 
  */
-function HeroReview({ review }: { review: string }) {
+function Review({ review }: { review: string }) {
   return (
     <div className="lg:col-start-1 indent-10">
       <p className="text-xs md:text-sm lg:text-base font-medium break-normal leading-relaxed">
@@ -121,7 +121,7 @@ function HeroReview({ review }: { review: string }) {
 
 /** * [ROW 2] HeroTechReview: Opis techniczny 
  */
-function HeroTechReview({ techReview }: { techReview: string }) {
+function TechReview({ techReview }: { techReview: string }) {
   return (
     <div className="lg:col-start-2 lg:col-span-2 indent-10">
       <p className="text-xs md:text-sm lg:text-base font-medium break-normal leading-relaxed">
@@ -133,7 +133,7 @@ function HeroTechReview({ techReview }: { techReview: string }) {
 
 /** * [ROW 3] HeroAchi: Lista kluczowych osiągnięć 
  */
-function HeroAchi({ keyAchi }: { keyAchi: string[] }) {
+function Achi({ keyAchi }: { keyAchi: string[] }) {
   return (
     <>
       <p className="font-sansation text-xl font-bold uppercase text-blue-950">Key Achievements</p>
@@ -154,7 +154,7 @@ function HeroAchi({ keyAchi }: { keyAchi: string[] }) {
 
 /** * [ROW 4] HeroLinks: Przyciski akcji (Source & Live) 
  */
-function HeroLinks({ href, gitHref }: { href?: string, gitHref?: string }) {
+function Links({ href, gitHref }: { href?: string, gitHref?: string }) {
   if (!href && !gitHref) return null;
 
   return (
@@ -186,7 +186,7 @@ function HeroLinks({ href, gitHref }: { href?: string, gitHref?: string }) {
 
 /** * [ROW 3/4] HeroCarousel: Interaktywna karuzela zdjęć (Embla) 
  */
-function HeroCarousel({ images }: { images: string[] }) {
+function Carousel({ images }: { images: string[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",

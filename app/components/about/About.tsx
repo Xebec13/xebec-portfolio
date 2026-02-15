@@ -13,7 +13,7 @@ export default function About() {
     <section className="min-h-screen">
       {/* HEADER SEKCJI */}
       <div className="pb-5 md:pb-15">
-        <h3 className="font-sansation uppercase text-[clamp(3rem,3rem+5vw,9rem)] font-semibold leading-none tracking-widest text-inherit">
+        <h3 className="font-sansation uppercase text-[clamp(3rem,3rem+5vw,9rem)] font-semibold leading-none whitespace-nowrap tracking-widest text-inherit">
           About Me
         </h3>
       </div>

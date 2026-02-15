@@ -11,7 +11,7 @@ export default function Home() {
       <div>
         <Hero />
       </div>
-      <div className="space-y-10 p-10 md:p-15 lg:p-20">
+      <div className="space-y-10 px-10 md:px-15 lg:px-20">
         <Works />
         <About />
       </div>
