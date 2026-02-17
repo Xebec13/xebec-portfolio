@@ -1,8 +1,8 @@
 "use client"; // Kluczowa zmiana
 
-import { GLOBAL } from "../../constants/portfolio";
+import { GLOBAL } from "@/app/constants/portfolio";
 import { useLanguage } from "@/app/providers/language-provider";
-import InteractiveGrid from "../../ui/InteractiveGrid";
+import InteractiveGrid from "@/app/ui/InteractiveGrid";
 import HeroInfo from "./HeroInfo";
 import HeroBio from "./HeroBio";
 
@@ -23,7 +23,7 @@ export default function Hero() {
         imgSrc={profileImg} 
       />
       
-      {/* Przekazujemy role i przetłumaczone bio */}
+      
       <HeroBio role={GLOBAL.role} bio={t.hero.bio} />
     </section>
   );

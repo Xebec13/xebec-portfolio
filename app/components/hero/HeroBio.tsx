@@ -12,7 +12,7 @@ const bioVariants: Variants = {
 
 interface HeroBioProps {
   role: string;
-  bio: string; // Nowy prop zamiast pobierania z contextu
+  bio: string; 
 }
 
 export default function HeroBio({ role, bio }: HeroBioProps) {

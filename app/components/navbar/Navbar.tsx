@@ -41,7 +41,7 @@ export default function Navbar() {
         initial={false}
         animate={introFinished ? { y: 0 } : { y: -100 }}
         transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
-        /* Ręczny invert na hover, o którym pisałeś */
+        
         className="fixed top-1.5 right-1.5 md:top-3 md:right-3 lg:top-5 lg:right-5 z-50 transition-all duration-700 bg-zinc-200 rounded-sm "
       >
         <NavIcon isOpen={isOpen} onClick={toggleMenu} className={`transition-all duration-700 ease-in-out z-10 hover:scale-105
