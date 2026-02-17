@@ -25,17 +25,19 @@ export default function WorksDetails({
   marquee, badges, review, techReview, achi, href, gitHref, images, projectId
 }: WorksDetailsProps) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 grid-flow-row gap-5 place-items-stretch py-6 lg:px-6 lg:py-10 overflow-hidden">
+    <div className="grid grid-cols-1 lg:grid-cols-3 grid-flow-row gap-3 lg:gap-5 place-items-stretch px-3 py-4 lg:px-6 lg:py-8 overflow-hidden">
 
       {/* --- RZĄD 1: Marquee & Badges --- */}
       <div className="row-start-1 lg:col-start-1">
         <Marquee words={marquee} id={projectId} />
       </div>
 
-      <div className="lg:col-start-2 lg:col-span-2 flex items-center">
+      <div className="lg:col-start-2 lg:col-span-1">
         <Badges items={badges} />
       </div>
-
+      <div className="row-start-6 col-start-1 lg:row-start-1 lg:col-start-3 flex items-center justify-center lg:justify-end">
+        <Links href={href} gitHref={gitHref} />
+      </div>
       {/* --- RZĄD 2: Opisy (Review & Tech) --- */}
       <div className="row-start-2 lg:row-start-2 lg:col-start-1">
         <Review review={review} />
@@ -48,9 +50,6 @@ export default function WorksDetails({
       {/* --- RZĄD 3 & 4: Osiągnięcia, Linki oraz Karuzela --- */}
       <div className="lg:row-start-3 lg:col-start-1">
         <Achi keyAchi={achi} />
-        <div className="mt-10">
-          <Links href={href} gitHref={gitHref} />
-        </div>
       </div>
 
       {/* Karuzela zajmuje dwie kolumny i rozciąga się przez dwa rzędy na desktopie */}
@@ -66,11 +65,11 @@ export default function WorksDetails({
    SUB-FUNKCJE (W KOLEJNOŚCI GRIDA)
    ========================================================================== */
 
-/** * [ROW 1] HeroMarquee: Płynny pasek słów kluczowych 
+/** * [ROW 1] Marquee: Płynny pasek słów kluczowych 
  */
 function Marquee({ words, id }: { words: string[], id: number }) {
   return (
-    <ul className="key-font flex items-center shrink-0 max-w-full text-blue-600 text-xs md:text-sm uppercase whitespace-nowrap overflow-hidden">
+    <ul className="key-font flex items-center shrink-0 max-w-full text-blue-700 text-xs lg:text-sm uppercase whitespace-nowrap overflow-hidden">
       <motion.div
         animate={{ x: [0, "-33.33%"] }}
         transition={{ ease: "linear", duration: 20, repeat: Infinity }}
@@ -82,7 +81,7 @@ function Marquee({ words, id }: { words: string[], id: number }) {
             className="inline-flex items-center gap-5 py-0.5 px-3 tracking-widest font-bold"
           >
             {word}
-            <div className="size-1 rounded-full bg-blue-600"></div>
+            <div className="size-1 rounded-full bg-blue-700"></div>
           </li>
         ))}
       </motion.div>
@@ -90,15 +89,15 @@ function Marquee({ words, id }: { words: string[], id: number }) {
   );
 }
 
-/** * [ROW 1] HeroBadges: Pigułki technologiczne (napisy) 
+/** * [ROW 1] Badges: Pigułki technologiczne (napisy) 
  */
 function Badges({ items }: { items: string[] }) {
   return (
-    <ul className="flex flex-wrap items-center gap-2 text-sm font-semibold uppercase">
+    <ul className="flex flex-wrap items-center gap-1 font-semibold uppercase">
       {items.map((techName, idx) => (
         <li
           key={`${techName}-${idx}`}
-          className="rounded-full text-[10px] md:text-xs border border-blue-800 bg-blue-600/30 text-blue-950 py-1 px-3 whitespace-nowrap tracking-wider"
+          className="rounded-full text-[8px] lg:text-[10px] border border-blue-800 bg-blue-600/30 text-blue-950 py-1 px-3 whitespace-nowrap tracking-wider"
         >
           {techName}
         </li>
@@ -107,7 +106,7 @@ function Badges({ items }: { items: string[] }) {
   );
 }
 
-/** * [ROW 2] HeroReview: Główny opis projektu 
+/** * [ROW 2] Review: Główny opis projektu 
  */
 function Review({ review }: { review: string }) {
   return (
@@ -119,7 +118,7 @@ function Review({ review }: { review: string }) {
   );
 }
 
-/** * [ROW 2] HeroTechReview: Opis techniczny 
+/** * [ROW 2] TechReview: Opis techniczny 
  */
 function TechReview({ techReview }: { techReview: string }) {
   return (
@@ -131,13 +130,13 @@ function TechReview({ techReview }: { techReview: string }) {
   );
 }
 
-/** * [ROW 3] HeroAchi: Lista kluczowych osiągnięć 
+/** * [ROW 3] Achi: Lista kluczowych osiągnięć 
  */
 function Achi({ keyAchi }: { keyAchi: string[] }) {
   return (
     <>
       <p className="font-sansation text-xl font-bold uppercase text-blue-950">Key Achievements</p>
-      <ul className="mt-4 space-y-4 font-medium">
+      <ul className="mt-4 space-y-2 font-medium">
         {keyAchi.map((achievement, idx) => (
           <li key={idx} className="flex items-center text-xs lg:text-sm gap-4 tracking-[1.5%] leading-4.75">
             <div className="relative inline-flex w-5 h-5 min-w-5 items-center justify-center">
@@ -152,19 +151,19 @@ function Achi({ keyAchi }: { keyAchi: string[] }) {
   );
 }
 
-/** * [ROW 4] HeroLinks: Przyciski akcji (Source & Live) 
+/** * [ROW 4] Links: Przyciski akcji (Source & Live) 
  */
 function Links({ href, gitHref }: { href?: string, gitHref?: string }) {
   if (!href && !gitHref) return null;
 
   return (
-    <div className="flex flex-wrap gap-3 text-xs md:text-sm font-medium whitespace-nowrap">
+    <div className="space-x-3 text-xs md:text-sm font-medium whitespace-nowrap underline">
       {gitHref && (
         <a
           href={gitHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center px-5 py-3 rounded-sm bg-zinc-50 text-blue-900 border border-transparent drop-shadow-md transition-all duration-700 ease-out hover:bg-blue-50 hover:border-blue-800"
+          className="text-neutral-950 text-xs md:text-sm font-semibold uppercase tracking-wide hover:text-blue-700 transition-colors cursor-pointer"
         >
           Source Code
         </a>
@@ -175,16 +174,16 @@ function Links({ href, gitHref }: { href?: string, gitHref?: string }) {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center px-5 py-3 rounded-sm bg-zinc-50 text-blue-900 border border-transparent drop-shadow-md transition-all duration-700 ease-out hover:bg-blue-50 hover:border-blue-800"
+          className="text-neutral-950 text-xs md:text-sm font-semibold uppercase tracking-wide hover:text-blue-700 transition-colors cursor-pointer"
         >
-          Live Demo
+          Website
         </a>
       )}
     </div>
   );
 }
 
-/** * [ROW 3/4] HeroCarousel: Interaktywna karuzela zdjęć (Embla) 
+/** * [ROW 3/4] Carousel: Interaktywna karuzela zdjęć (Embla) 
  */
 function Carousel({ images }: { images: string[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({

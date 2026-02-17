@@ -2,10 +2,10 @@
 
 import { useState, useLayoutEffect, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useLanguage } from "../providers/language-provider";
-import { useIntro } from "../providers/intro-provider"; 
-import { Language } from "../constants/portfolio";
-import IntroButtons from "./IntroButtons";
+import { useLanguage } from "@/app/providers/language-provider";
+import { useIntro } from "@/app/providers/intro-provider"; 
+import { Language } from "@/app/constants/portfolio";
+import IntroButtons from "@/app/ui/IntroButtons";
 
 const SLIM_EASING = [0.65, 0, 0.35, 1] as const;
 const DURATION = 1.8;

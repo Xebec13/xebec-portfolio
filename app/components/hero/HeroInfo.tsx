@@ -28,7 +28,7 @@ interface HeroInfoProps {
 export default function HeroInfo({ firstName, lastName, imgSrc }: HeroInfoProps) {
   return (
     <div className="relative flex flex-col-reverse justify-center gap-5 md:flex-row md:justify-between">
-      <h1 className="font-sansation relative z-10 max-w-fit text-[clamp(2rem,2rem+7vw,10rem)] font-semibold uppercase leading-none text-neutral-900 pointer-events-none tracking-tighter">
+      <h1 className="font-sansation relative z-10 max-w-fit text-[clamp(2rem,2rem+7vw,9rem)] font-semibold uppercase leading-none text-neutral-900 pointer-events-none tracking-tighter">
         <span className="block overflow-hidden p-1">
           <motion.span variants={infoVariants} className="block">
             {firstName}

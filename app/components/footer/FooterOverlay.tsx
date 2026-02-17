@@ -63,7 +63,7 @@ export default function FooterOverlay({ onClose }: FooterOverlayProps) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="absolute inset-0 z-40 grid grid-cols-1 lg:grid-cols-2 lg:place-items-center gap-2 min-h-screen p-10 md:p-15 lg:p-20 text-zinc-50 bg-neutral-700 overflow-y-auto"
+            className="absolute inset-0 z-40 grid grid-cols-1 lg:grid-cols-2 lg:place-items-center gap-2 min-h-screen px-5 py-5 md:px-10 md:py-10 lg:px-15 text-zinc-50 bg-neutral-800"
         >
             {/* --- LEWA KOLUMNA --- */}
             <div className="w-full self-end lg:self-center space-y-2 mb-5 lg:mb-0">
@@ -71,19 +71,19 @@ export default function FooterOverlay({ onClose }: FooterOverlayProps) {
                 {/* Close Button */}
                 <motion.div 
                     variants={contentVariants} // Przycisk też może wjechać od dołu
-                    className="absolute top-5 left-5"
+                    className="absolute top-1.5 left-1.5 md:top-3 md:left-3"
                 >
                     <BackChevron 
                         onClick={onClose} 
-                        className="text-inherit hover:bg-blue-700 hover:text-zinc-50 transition-colors [&>div]:size-1.5 md:[&>div]:size-2" 
+                        className="text-inherit hover:bg-blue-700 hover:text-zinc-50 transition-colors" 
                     />
                 </motion.div>
 
                 {/* Heading (Maskowany od góry) */}
                 <div className="overflow-hidden">
                     <motion.h3 
-                        variants={titleVariants} // Używamy wariantu "Slide Down"
-                        className="uppercase text-[clamp(1.5rem,3rem+1vw,5rem)] font-bold leading-tight tracking-tight"
+                        variants={titleVariants} 
+                        className="uppercase text-[clamp(1rem,1.5rem+3vw,5rem)] font-bold leading-tight tracking-tight"
                     >
                         {t.form.title}
                     </motion.h3>
@@ -94,7 +94,7 @@ export default function FooterOverlay({ onClose }: FooterOverlayProps) {
                     <motion.a
                         href={`mailto:${GLOBAL.email}`}
                         variants={contentVariants} // Używamy wariantu "Slide Up"
-                        className="block max-w-fit pl-1.5 text-xl md:text-2xl lg:text-3xl font-semibold hover:text-blue-700 transition-colors "
+                        className="underline block max-w-fit pl-1.5 text-xl md:text-2xl lg:text-3xl font-semibold hover:text-blue-700 transition-colors "
                     >
                         {GLOBAL.email}
                     </motion.a>

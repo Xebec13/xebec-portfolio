@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Language } from "../constants/portfolio";
-import { useLanguage } from "../providers/language-provider";
+import { Language } from "@/app/constants/portfolio";
+import { useLanguage } from "@/app/providers/language-provider";
 
 interface IntroButtonsProps {
   onSelect: (lang: Language) => void;

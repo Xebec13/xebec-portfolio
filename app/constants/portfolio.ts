@@ -10,7 +10,7 @@ export const GLOBAL = {
   },
   navLinks: [
     { href: "#home", key: "home" },
-    { href: "#projects", key: "projects" },
+    { href: "#works", key: "works" },
     { href: "#about", key: "about" },
     { href: "#footer", key: "footer" },
   ]
@@ -19,7 +19,7 @@ export const GLOBAL = {
 export interface DictionarySchema {
   nav: {
     home: string;
-    projects: string;
+    works: string;
     about: string;
     footer: string;
   };
@@ -57,8 +57,8 @@ export interface DictionarySchema {
 }
 
 const navData: Record<Language, DictionarySchema["nav"]> = {
-  en: { home: "Home", projects: "Projects", about: "About", footer: "Contact" },
-  pl: { home: "Start", projects: "Projekty", about: "O mnie", footer: "Kontakt" },
+  en: { home: "Home", works: "Projects", about: "About", footer: "Contact" },
+  pl: { home: "Start", works: "Projekty", about: "O mnie", footer: "Kontakt" },
 };
 
 const heroData: Record<Language, DictionarySchema["hero"]> = {

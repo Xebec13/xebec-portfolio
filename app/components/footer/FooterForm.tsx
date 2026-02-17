@@ -134,16 +134,14 @@ export default function FooterForm() {
 
     // --- STYLE ---
     const getInputClass = (fieldName: keyof FormErrors) => `
-        w-full p-6 bg-zinc-50 
+        w-full p-3 lg:p-6 bg-zinc-50 
         border-2 outline-none
         transition-all duration-200 ease-in-out
-        font-medium placeholder:text-zinc-400 text-zinc-900
+        font-medium placeholder:text-zinc-800 text-neutral-950
         disabled:opacity-50 disabled:cursor-not-allowed
-        
-        /* Focus State - Thick Border */
         focus:bg-white focus:border-4 focus:border-blue-800
         
-        /* Error State */
+       
         ${errors[fieldName] 
             ? 'border-red-600 bg-red-50 focus:border-red-600' 
             : 'border-zinc-300'
@@ -176,7 +174,7 @@ export default function FooterForm() {
                         {errors.user_name && (
                             <motion.p 
                                 initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                                className="text-red-600 text-xs font-bold absolute left-1 mt-0.5"
+                                className="text-red-600 text-xs font-bold absolute left-1 mt-1"
                             >
                                 {errors.user_name}
                             </motion.p>
@@ -239,7 +237,7 @@ export default function FooterForm() {
                     {status === 'error' && (
                         <motion.p
                             initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-                            className="text-red-600 text-sm font-semibold text-center mt-2"
+                            className="text-red-600 text-sm font-semibold text-center mt-0.5"
                         >
                             {globalError}
                         </motion.p>
@@ -251,10 +249,16 @@ export default function FooterForm() {
                     type="submit"
                     disabled={status === 'sending' || status === 'success'}
                     className={`
-                        w-full p-5 rounded-sm bg-zinc-50 drop-shadow-md mt-2
-                        font-bold  tracking-wide
-                        transition-all duration-300 ease-out
-                        outline-0  outline-transparent
+                        mt-1
+                        will-change-[colors,scale]
+                            w-full md:max-w-full p-3 lg:p-5
+                            rounded-sm bg-zinc-50
+                            text-blue-900 font-bold tracking-wide
+                            transition-all duration-300 ease-out
+                            outline-0 outline-transparent
+                            hover:outline-3 hover:outline-blue-700 
+                            hover:scale-[1.02] 
+                            cursor-pointer
                         
                         ${/* IDLE */ ""}
                         ${status === 'idle' 

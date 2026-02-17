@@ -15,13 +15,6 @@ import {
 // ==========================================================================
 // 1. MAIN COMPONENT: AboutBox
 // ==========================================================================
-
-// Warianty dla przycisku - puste, ale konieczne do przekazania sygnału w dół do ikon
-const buttonVariants = {
-    initial: {},
-    hover: {}
-};
-
 export default function AboutBox() {
     const [activeIdx, setActiveIdx] = useState<number | null>(null);
     const { language } = useLanguage();
@@ -37,12 +30,19 @@ export default function AboutBox() {
             default: return null;
         }
     };
-
+    // Warianty dla przycisku - puste, ale konieczne do przekazania sygnału w dół do ikon
+    const buttonVariants = {
+        initial: {},
+        hover: {}
+    };
     return (
         <div className="relative size-full">
-
             {/* --- GRID BUTTONS (TŁO) --- */}
-            <div className="grid grid-cols-2 gap-1 size-full min-h-100 lg:min-h-150">
+            <motion.div 
+                initial={{ scale: 0.5 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }} className="grid grid-cols-2 gap-1 size-full min-h-100 lg:min-h-150">
                 {aboutData.map((item, idx) => (
                     <motion.button // ZMIANA: motion.button
                         key={item.id}
@@ -57,13 +57,13 @@ export default function AboutBox() {
                         <div className="relative z-10 transition-transform duration-300 group-hover:scale-110">
                             {getIcon(idx)}
                         </div>
-                        
+
                         <h3 className="relative z-10 text-sm md:text-base lg:text-lg font-bold uppercase tracking-wide">
                             {item.name}
                         </h3>
                     </motion.button>
                 ))}
-            </div>
+            </motion.div>
 
             {/* --- OVERLAY (Szczegóły) --- */}
             <AnimatePresence>
@@ -105,7 +105,7 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
 
     // Definiujemy, skąd ma "wyjechać" overlay (transform origin)
     const origins = ["origin-top-left", "origin-top-right", "origin-bottom-left", "origin-bottom-right"];
-    
+
     // Warianty Overlayu
     const overlayVariants = {
         initial: { opacity: 0, scale: 0.9 },
@@ -116,8 +116,8 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
     return (
         <motion.div
             data-lenis-prevent="true"
-            variants={overlayVariants} 
-            initial="initial"           
+            variants={overlayVariants}
+            initial="initial"
             animate="animate"
             exit="exit"
             className={`absolute group inset-0 z-20 flex flex-col bg-zinc-100 shadow-2xl overflow-hidden ${origins[index]}`}
@@ -125,13 +125,13 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
             {/* --- Header --- */}
             <div className="flex items-center justify-between px-3 py-2 border-b border-inherit min-h-15 max-h-15 text-zinc-50 bg-neutral-800">
                 <div className="flex items-center gap-3">
-                    <BackChevron onClick={onClose} className="[&>div]:size-1.5 bg-transparent transition-colors ease-in-out duration-700 hover:bg-blue-600" />
+                    <BackChevron onClick={onClose} className="[&>div]:size-1.5 bg-transparent transition-colors ease-in-out duration-700 hover:bg-blue-700" />
                     <h4 className="font-sansation font-bold uppercase tracking-wide leading-none">
                         {item.name}
                     </h4>
                 </div>
-                
-                <div className="opacity-90 scale-85">{icon}</div>
+
+                <div className="opacity-90 scale-75">{icon}</div>
             </div>
 
             {/* --- Scrollable Content --- */}
@@ -142,7 +142,7 @@ function OverlayContent({ item, index, icon, onClose }: OverlayProps) {
                     <p className="text-base font-bold uppercase mb-3 tracking-wider">
                         {item.headings[0]}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1">
                         {item.badges.map((badge, i) => (
                             <span
                                 key={i}
@@ -227,9 +227,9 @@ function ContentRenderer({ index, content }: { index: number, content: AboutSect
                         <div key={i}>
                             {/* Tutaj jest text-sm */}
                             <p className="text-sm font-bold text-neutral-700 uppercase mb-1">{subTitle}</p>
-                            <div className="flex flex-wrap gap-2 lg:gap-4">
+                            <div className="flex flex-wrap gap-1.5 lg:gap-3">
                                 {block.map((txt, j) => (
-                                    <div key={j} className="flex items-center gap-2 lg:gap-4 text-sm text-zinc-800 font-medium">
+                                    <div key={j} className="flex items-center gap-1.5 lg:gap-3 text-sm text-zinc-800 font-medium">
                                         <span className="size-1.5 rounded-full bg-blue-700" />
                                         {txt}
                                     </div>

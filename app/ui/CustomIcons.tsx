@@ -40,7 +40,7 @@ export function NavIcon({ isOpen = false, onClick, className = "" }: CustomIcons
               duration: 0.7,
               ease: [0.65, 0, 0.35, 1], // SLIM_EASING
             }}
-            className="size-1 md:size-1.5 lg:size-2 bg-current"
+            className="size-1 md:size-1.5 bg-current"
           />
         );
       })}
@@ -131,7 +131,7 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
 
   return (
     <div
-      className={`grid grid-cols-3 gap-0.5  text-current ${className}`}
+      className={`grid grid-cols-3 gap-0.5`}
       aria-hidden="true"
     >
       {[...Array(9)].map((_, i) => {
@@ -148,7 +148,7 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
                 y: isOpen ? 3 : 0,
               }}
               transition={{ duration: 0.4, ease: SLIM_EASING }}
-              className="size-1 md:size-1.3 bg-current"
+              className={`bg-current text-current ${className}`}
             />
           );
         }
@@ -164,7 +164,7 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
                 y: isOpen ? 0 : -3,
               }}
               transition={{ duration: 0.4, ease: SLIM_EASING }}
-              className="size-1 md:size-1.3 bg-current"
+              className={`bg-current text-current ${className}`}
             />
           );
         }
@@ -177,7 +177,7 @@ export function UpDownChevron({ isOpen = false, className = "" }: CustomIconsPro
             animate={{
               opacity: isStaticHidden ? 0 : 1,
             }}
-            className="size-1 md:size-1.3 bg-current"
+            className={`bg-current text-current ${className}`}
           />
         );
       })}
@@ -200,8 +200,7 @@ export function BackChevron({ onClick, className = "" }: CustomIconsProps) {
       <div
         className={`
           grid grid-cols-3 gap-0.5 p-1 
-          transition-all duration-500 ease-in-out
-          [&>div]:size-1  
+          transition-all duration-500 ease-in-out 
           ${className}
         `}
       >
@@ -209,7 +208,7 @@ export function BackChevron({ onClick, className = "" }: CustomIconsProps) {
           <div
             key={i}
             className={`
-              border-2 border-inherit transition-opacity bg-current
+              border-2 border-inherit transition-opacity bg-current size-1.5
               ${!visibleCells.includes(i) ? "opacity-0" : "opacity-100"}
             `}
           />
@@ -237,7 +236,7 @@ export function CodingIcon({ className = "" }: { className?: string }) {
         {[...Array(9)].map((_, i) => (
           <div
             key={i}
-            className={`size-1.5 border-2 border-inherit bg-current transition-opacity ${
+            className={`size-1 lg:size-1.5 border-2 border-inherit bg-current transition-opacity ${
               BRACKET_LEFT_MAP.includes(i) ? "opacity-100" : "opacity-0"
             }`}
           />
@@ -267,7 +266,7 @@ export function CodingIcon({ className = "" }: { className?: string }) {
                 }
               }
             }}
-            className="size-1.5 border-2 border-inherit bg-current"
+            className="size-1 lg:size-1.5 border-2 border-inherit bg-current"
           />
         ))}
       </motion.div>
@@ -284,7 +283,7 @@ export function CodingIcon({ className = "" }: { className?: string }) {
         {[...Array(9)].map((_, i) => (
           <div
             key={i}
-            className={`size-1.5 border-2 border-inherit bg-current transition-opacity ${
+            className={`size-1 lg:size-1.5 border-2 border-inherit bg-current transition-opacity ${
               BRACKET_RIGHT_MAP.includes(i) ? "opacity-100" : "opacity-0"
             }`}
           />
@@ -330,7 +329,7 @@ export function ProfIcon({ className = "" }: { className?: string }) {
                 }
               }}
               className={`
-                size-1.5 border-2 border-inherit bg-current
+                size-1 lg:size-1.5 border-2 border-inherit bg-current
             
                 ${i === 1 ? "rounded-tl-sm" : ""}
                 ${i === 2 ? "rounded-tr-sm" : ""}
@@ -370,7 +369,7 @@ export function CertIcon({ className = "" }: { className?: string }) {
           }
         }}
         // Punkt obrotu: Prawy dolny róg (jak zawias)
-        className="w-3 h-2.5 border-[2.5px] border-b-0 border-inherit rounded-t-full origin-bottom-right"
+        className="size-2 lg:size-3 border-[2.5px] border-b-0 border-inherit rounded-t-full origin-bottom-right"
       />
 
       {/* --- BODY (Korpus 3x3) --- */}
@@ -393,7 +392,7 @@ export function CertIcon({ className = "" }: { className?: string }) {
           <div
             key={i}
             className={`
-              size-1.5 border-2 border-inherit 
+              size-1 lg:size-1.5 border-2 border-inherit 
               ${i === 4 ? "border-transparent bg-transparent" : "bg-current"}
             `}
           />
@@ -472,16 +471,16 @@ export function PersonalIcon({ className = "" }: { className?: string }) {
   return (
     <div
       ref={faceRef}
-      className={`relative flex items-center justify-center size-10 ${className}`}
+      className={`relative flex items-center justify-center ${className}`}
       aria-label="Personal interests"
     >
       {/* --- GRID (Twarz) --- */}
-      <div className="grid grid-cols-5 gap-2 size-full">
+      <div className="grid grid-cols-5 gap-x-1 gap-y-2 lg:gap-x-1.5 lg:gap-y-2">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
             className={`
-              size-1 border-2 border-inherit bg-current transition-opacity
+              size-1 lg:size-1.25 border-2 border-inherit bg-current transition-opacity
               ${HIDDEN_INDICES.includes(i) ? "opacity-0" : "opacity-100"}
             `}
           />
@@ -489,19 +488,19 @@ export function PersonalIcon({ className = "" }: { className?: string }) {
       </div>
 
       {/* --- EYES & MOUTH Container --- */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center  pointer-events-none">
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
         
         {/* OCZY */}
         <div className="flex gap-1 ml-0.5 mb-1.5">
           {/* Lewe Oko */}
-          <div className="relative size-2.5 bg-blue-100 border-2 border-inherit rounded-full flex items-center justify-center overflow-hidden">
+          <div className="relative size-2.5 lg:size-3 bg-blue-100 border-2 border-inherit rounded-full flex items-center justify-center overflow-hidden">
             <motion.div
               style={{ x: springX, y: springY }}
               className="size-1 bg-blue-900 rounded-full "
             />
           </div>
           {/* Prawe Oko */}
-          <div className="relative size-2.5 bg-blue-100 border-2 border-inherit rounded-full flex items-center justify-center overflow-hidden">
+          <div className="relative size-2.5 lg:size-3 bg-blue-100 border-2 border-inherit rounded-full flex items-center justify-center overflow-hidden">
             <motion.div
               style={{ x: springX, y: springY }}
               className="size-1 bg-blue-900 rounded-full "

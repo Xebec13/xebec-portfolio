@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode, useMemo } from "react";
-import { DICTIONARY, Language, DictionarySchema } from "../constants/portfolio";
+import { DICTIONARY, Language, DictionarySchema } from "@/app/constants/portfolio";
 
 interface LanguageContextType {
   language: Language;
