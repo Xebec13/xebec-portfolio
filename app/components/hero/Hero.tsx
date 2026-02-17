@@ -12,7 +12,7 @@ export default function Hero() {
   const profileImg = "/portfolio-img.png"; 
 
   return (
-    <section id="home" className="relative flex min-h-screen flex-col justify-start md:justify-evenly overflow-hidden px-10 pt-15 md:px-15 md:pt-10 lg:px-20 lg:pt-5">
+    <section id="home" className="relative flex min-h-screen flex-col justify-start md:justify-evenly overflow-hidden px-10 pt-5 md:px-15 md:pt-10 lg:px-20 lg:pt-5">
       <InteractiveGrid 
         totalCells={50} 
       />

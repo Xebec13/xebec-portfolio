@@ -24,7 +24,7 @@ const workSans = Work_Sans({
 export const metadata: Metadata = {
   title: "DH Portfolio | Front-End Developer",
   description: "Developer Portfolio",
-  metadataBase: new URL("https://xebec13.netlify.app")
+  metadataBase: new URL("https://dh-portfolio.netlify.app")
 };
 
 export default function RootLayout({

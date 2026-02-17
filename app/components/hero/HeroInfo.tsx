@@ -28,7 +28,7 @@ interface HeroInfoProps {
 export default function HeroInfo({ firstName, lastName, imgSrc }: HeroInfoProps) {
   return (
     <div className="relative flex flex-col-reverse justify-center gap-5 md:flex-row md:justify-between">
-      <h1 className="font-sansation relative z-10 max-w-fit text-[clamp(4.25rem,2rem+7.5vw,13rem)] font-semibold uppercase leading-none text-neutral-900 pointer-events-none tracking-tighter">
+      <h1 className="font-sansation relative z-10 max-w-fit text-[clamp(2rem,2rem+7vw,10rem)] font-semibold uppercase leading-none text-neutral-900 pointer-events-none tracking-tighter">
         <span className="block overflow-hidden p-1">
           <motion.span variants={infoVariants} className="block">
             {firstName}
@@ -43,7 +43,7 @@ export default function HeroInfo({ firstName, lastName, imgSrc }: HeroInfoProps)
 
       <motion.div
         variants={imgVariants}
-        className="relative z-30 shrink-0 size-45 md:size-55 lg:size-65 rounded-full pointer-events-auto overflow-hidden bg-zinc-200/90"
+        className="relative z-30 shrink-0 size-40 md:size-50 lg:size-60 rounded-full pointer-events-auto overflow-hidden bg-zinc-200/90"
       >
         <Image 
           src={imgSrc} 
