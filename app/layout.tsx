@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
  
   title: {
-    default: "Dawid Hoesen | Interactive Developer",
+    default: "Dawid Hoesen | Interactive Front-End Developer",
     template: "%s | Dawid Hoesen",
   },
   description: "Projektuję strony minimalistyczne, responsywne i wizualnie dopracowane.",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pl_PL",
     url: "https://dhoesen.pl",
-    title: "Dawid Hoesen | Interactive Developer",
+    title: "Dawid Hoesen | Interactive Front-End Developer",
     description: "Projektuję strony minimalistyczne, responsywne i wizualnie dopracowane.",
     siteName: "Dawid Hoesen",
     images: [
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Dawid Hoesen | Interactive Developer",
+    title: "Dawid Hoesen | Interactive Front-End Developer",
     images: ["/opengraph-image.png"],
   },
 

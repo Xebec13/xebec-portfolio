@@ -35,9 +35,7 @@ export default function WorksDetails({
       <div className="lg:col-start-2 lg:col-span-1">
         <Badges items={badges} />
       </div>
-      <div className="row-start-6 col-start-1 lg:row-start-1 lg:col-start-3 flex items-center justify-center lg:justify-end">
-        <Links href={href} gitHref={gitHref} />
-      </div>
+
       {/* --- RZĄD 2: Opisy (Review & Tech) --- */}
       <div className="row-start-2 lg:row-start-2 lg:col-start-1">
         <Review review={review} />
@@ -48,12 +46,15 @@ export default function WorksDetails({
       </div>
 
       {/* --- RZĄD 3 & 4: Osiągnięcia, Linki oraz Karuzela --- */}
-      <div className="lg:row-start-3 lg:col-start-1">
+      <div className="row-start-5 row-span-2 lg:row-start-3 lg:col-start-1 flex flex-col gap-3">
         <Achi keyAchi={achi} />
+        <div className="my-5">
+          <Links href={href} gitHref={gitHref} />
+        </div>
       </div>
 
       {/* Karuzela zajmuje dwie kolumny i rozciąga się przez dwa rzędy na desktopie */}
-      <div className="lg:col-start-2 lg:col-span-2 lg:row-start-3  self-center">
+      <div className="row-start-7 lg:col-start-2 lg:col-span-2 lg:row-start-3 self-center">
         <Carousel images={images} />
       </div>
 
@@ -69,7 +70,7 @@ export default function WorksDetails({
  */
 function Marquee({ words, id }: { words: string[], id: number }) {
   return (
-    <ul className="key-font flex items-center shrink-0 max-w-full text-blue-700 text-xs lg:text-sm uppercase whitespace-nowrap overflow-hidden">
+    <ul className="key-font flex items-center shrink-0 max-w-full text-blue-700 text-sm lg:text-base uppercase whitespace-nowrap overflow-hidden">
       <motion.div
         animate={{ x: [0, "-33.33%"] }}
         transition={{ ease: "linear", duration: 20, repeat: Infinity }}
@@ -93,11 +94,11 @@ function Marquee({ words, id }: { words: string[], id: number }) {
  */
 function Badges({ items }: { items: string[] }) {
   return (
-    <ul className="flex flex-wrap items-center gap-1 font-semibold uppercase">
+    <ul className="flex flex-wrap gap-1 font-semibold uppercase">
       {items.map((techName, idx) => (
         <li
           key={`${techName}-${idx}`}
-          className="rounded-full text-[8px] lg:text-[10px] border border-blue-800 bg-blue-600/30 text-blue-950 py-1 px-3 whitespace-nowrap tracking-wider"
+          className="rounded-full text-xs lg:text-sm border border-blue-800 bg-blue-600/30 text-blue-950 py-1 px-3 whitespace-nowrap tracking-wider flex items-center"
         >
           {techName}
         </li>
@@ -111,7 +112,7 @@ function Badges({ items }: { items: string[] }) {
 function Review({ review }: { review: string }) {
   return (
     <div className="lg:col-start-1 indent-10">
-      <p className="text-xs md:text-sm lg:text-base font-medium break-normal leading-relaxed">
+      <p className="text-sm md:text-base lg:text-lg font-medium break-normal leading-relaxed">
         {review}
       </p>
     </div>
@@ -123,7 +124,7 @@ function Review({ review }: { review: string }) {
 function TechReview({ techReview }: { techReview: string }) {
   return (
     <div className="lg:col-start-2 lg:col-span-2 indent-10">
-      <p className="text-xs md:text-sm lg:text-base font-medium break-normal leading-relaxed">
+      <p className="text-sm md:text-base lg:text-lg font-medium break-normal leading-relaxed">
         {techReview}
       </p>
     </div>
@@ -136,9 +137,9 @@ function Achi({ keyAchi }: { keyAchi: string[] }) {
   return (
     <>
       <p className="font-sansation text-xl font-bold uppercase text-blue-950">Key Achievements</p>
-      <ul className="mt-4 space-y-2 font-medium">
+      <ul className="mt-2 space-y-2 font-medium">
         {keyAchi.map((achievement, idx) => (
-          <li key={idx} className="flex items-center text-xs lg:text-sm gap-4 tracking-[1.5%] leading-4.75">
+          <li key={idx} className="flex items-center text-sm lg:text-base gap-4 tracking-[1.5%] leading-4.75">
             <div className="relative inline-flex w-5 h-5 min-w-5 items-center justify-center">
               <div className="absolute w-3/4 h-3/4 bg-blue-300 rounded-full opacity-75 animate-ping" />
               <div className="relative w-1/2 h-1/2 bg-blue-800 rounded-full" />
@@ -157,26 +158,31 @@ function Links({ href, gitHref }: { href?: string, gitHref?: string }) {
   if (!href && !gitHref) return null;
 
   return (
-    <div className="space-x-3 text-xs md:text-sm font-medium whitespace-nowrap underline">
+    <div className="text-sm lg:text-base font-medium whitespace-nowrap flex flex-row items-center justify-start gap-1">
       {gitHref && (
         <a
           href={gitHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-neutral-950 text-xs md:text-sm font-semibold uppercase tracking-wide hover:text-blue-700 transition-colors cursor-pointer"
+          className="btn-pirate"
         >
+          <div className="">
           Source Code
+          </div>
         </a>
       )}
 
       {href && (
-        <a
-          href={href}
+       <a
+          href={gitHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-neutral-950 text-xs md:text-sm font-semibold uppercase tracking-wide hover:text-blue-700 transition-colors cursor-pointer"
+          className="btn-pirate"
         >
+          <div className="">
           Website
+          </div>
+          
         </a>
       )}
     </div>
