@@ -8,8 +8,8 @@ A high-performance, motion-driven developer portfolio built with a focus on imme
 
 ## 🛠️ Tech Stack
 
-- **Next.js 16** (App Router)
+- **Next.js** 
 - **TypeScript** 
-- **Tailwind CSS** (v4 implementation)
+- **Tailwind CSS**
 - **Motion** (motion/react)
-- **Framing & Smooth Scroll** (Lenis/Custom)
+- **Lenis & Smooth Scroll**

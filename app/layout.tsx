@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next"; // Dodano Viewport
+import type { Metadata, Viewport } from "next";
 import { Sansation, Inter, Work_Sans } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "./providers";
@@ -22,64 +22,71 @@ const workSans = Work_Sans({
   weight: ["400", "600"],
 });
 
-// 5. Theme Color przeniesione do eksportu viewport (standard Next.js 14+)
 export const viewport: Viewport = {
-  themeColor: "#000", 
+  themeColor: "#0a0a0a", 
   width: "device-width",
   initialScale: 1,
+  colorScheme: "dark light",
 };
 
 export const metadata: Metadata = {
-  // 3. Title Template - pozwala na dynamiczne tytuły podstron
+  // 1. Zmiana nazwy z "DH Portfolio" na Twoją markę osobistą
   title: {
-    default: "DH Portfolio | Front-End Developer",
-    template: "%s | DH Portfolio",
+    default: "Dawid Hoesen | Creative Front-End Developer",
+    template: "%s | Dawid Hoesen",
   },
   description: "Creative Front-End Developer focused on building high-performance, responsive, and visually sharp web interfaces with React and Next.js.",
-  metadataBase: new URL("https://dh-portfolio.netlify.app"),
+  metadataBase: new URL("https://dhoesen.pl"),
 
-  // 4. Keywords & Robots
-  keywords: ["Front-End Developer", "React Developer", "Next.js", "TypeScript"],
+  // 2. Dodanie autora i kanonicznego URL (SEO Best Practices)
+  alternates: {
+    canonical: "/",
+  },
+  authors: [{ name: "Dawid Hoesen" }],
+
+  keywords: ["Dawid Hoesen", "Front-End Developer", "React Developer", "Next.js", "TypeScript", "UI/UX Design"],
+  
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
   },
 
-  // 1. Open Graph (Messenger, Facebook, LinkedIn)
+  // 3. Open Graph z nową nazwą i domeną
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://dh-portfolio.netlify.app",
-    title: "DH Portfolio | Front-End Developer",
-    description: "Building high-performance, responsive, and visually sharp web interfaces with React and Next.js.",
-    siteName: "DH Portfolio",
+    url: "https://dhoesen.pl",
+    title: "Dawid Hoesen | Creative Front-End Developer",
+    description: "Building high-performance, responsive, and visually sharp web interfaces.",
+    siteName: "Dawid Hoesen",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image.png", 
         width: 1200,
         height: 630,
-        alt: "DH Portfolio",
+        alt: "Dawid Hoesen Portfolio",
       },
     ],
   },
 
-  // 1. Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: "DH Portfolio | Front-End Developer",
-    description: "Creative Front-End Developer Portfolio",
+    title: "Dawid Hoesen | Front-End Developer",
     images: ["/opengraph-image.png"],
   },
 
-  // 2. Icons (Favicon & Apple Touch Icon)
+  // 4. Wykorzystanie logo.svg jako nowoczesnej ikony (SVG skaluje się idealnie)
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png", // Dla urządzeń iOS
+    icon: [
+      // Chrome, Firefox, Edge - wezmą SVG i dopasują kolor (Dark/Light)
+      { url: "/logo.svg", type: "image/svg+xml" },
+      // Zapasowy favicon dla bardzo starych systemów
+      { url: "/favicon.png", sizes: "32x32" },
+    ],
+    apple: [
+      // iPhone/Safari - potrzebują statycznego PNG
+      { url: "/apple-touch-icon.png" }, 
+    ],
   },
 };
 
@@ -89,8 +96,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // 6. Lang pozostaje "en", dopóki nie wdrożymy i18n routing (np. /[lang]/layout.tsx)
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${sansation.variable} ${inter.variable} ${workSans.variable} antialiased`}
       >

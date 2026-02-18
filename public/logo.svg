@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* Domyślnie (Light Mode) - Kolor Neutral-950 */
+    .logo-path { fill: #0a0a0a; }
+
+    /* Dark Mode - Kolor Zinc-200 */
+    @media (prefers-color-scheme: dark) {
+      .logo-path { fill: #e4e4e7; }
+    }
+  </style>
+  
+  <path class="logo-path" d="M202.846 368.446C305.05 368.446 356.152 328.267 356.152 247.907C356.152 177.926 305.05 142.935 202.846 142.935H105.022V368.446H202.846ZM51 398.381V113H202.846C341.064 113 410.174 157.969 410.174 247.907C410.174 348.223 341.064 398.381 202.846 398.381H51Z" />
+  
+  <path class="logo-path" d="M460 348V398H410V348H460Z" />
+</svg>
