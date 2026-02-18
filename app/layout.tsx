@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
  
   title: {
-    default: "Dawid Hoesen | Interactive Front-End Developer",
+    default: "Dawid Hoesen | Creative Developer",
     template: "%s | Dawid Hoesen",
   },
   description: "Projektuję strony minimalistyczne, responsywne i wizualnie dopracowane.",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   authors: [{ name: "Dawid Hoesen" }],
 
-  keywords: ["Dawid Hoesen","Interactive Developer", "Front-End Developer", "React Developer","Web Developer", "Next.js", "TypeScript", "UI/UX Design"],
+  keywords: ["Dawid Hoesen","Creative Developer", "Front-End Developer", "React Developer","Web Developer", "Next.js", "TypeScript","Motion", "UI/UX Design"],
   
   robots: {
     index: true,
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pl_PL",
     url: "https://dhoesen.pl",
-    title: "Dawid Hoesen | Interactive Front-End Developer",
+    title: "Dawid Hoesen | Creative Developer",
     description: "Projektuję strony minimalistyczne, responsywne i wizualnie dopracowane.",
     siteName: "Dawid Hoesen",
     images: [
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Dawid Hoesen | Interactive Front-End Developer",
+    title: "Dawid Hoesen | Creative Developer",
     images: ["/opengraph-image.png"],
   },
 

@@ -2,7 +2,7 @@ export type Language = "en" | "pl";
 
 export const GLOBAL = {
   name: "Dawid Hoesen",
-  role: "Interactive Front-End Developer",
+  role: "Creative Developer",
   email: "dhoesen@gmail.com",
   socials: {
     github: "https://github.com/Xebec13",

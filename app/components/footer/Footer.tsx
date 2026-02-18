@@ -9,31 +9,31 @@ import InteractiveGrid from "@/app/ui/InteractiveGrid";
 
 
 const fadeInSocials: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.8, ease: "easeOut" } 
-  }
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.8, ease: "easeOut" }
+    }
 };
 
 const fadeInTitle: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
-  }
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: "easeOut" }
+    }
 };
 
 const scaleButton: Variants = {
-  hidden: { scale: 0 },
-  visible: { scale: 1, transition: { duration: 0.8, ease: [0.34, 1.56, 0.64, 1] } }
+    hidden: { scale: 0 },
+    visible: { scale: 1, transition: { duration: 0.8, ease: [0.34, 1.56, 0.64, 1] } }
 };
 
 const revealStatus: Variants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.2 } }
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.2 } }
 };
 
 export default function Footer() {
@@ -47,7 +47,7 @@ export default function Footer() {
             className="relative min-h-screen flex flex-col justify-center gap-5 lg:gap-10 md:justify-evenly bg-neutral-900 px-5 py-5 md:px-10 md:py-10 lg:px-15"
         >
             <InteractiveGrid totalCells={50} />
-            
+
             {/* --- 1. SOCIAL LINKS --- */}
             <div className="relative z-20 lg:ml-auto flex gap-6 bg-neutral-900 p-2 text-zinc-50 text-sm md:text-base font-bold uppercase tracking-wide">
                 {[
@@ -72,7 +72,7 @@ export default function Footer() {
 
             {/* --- 2. MAIN CTA CONTENT --- */}
             <div className="flex flex-col gap-15 justify-center">
-                <motion.h3 
+                <motion.h3
                     variants={fadeInTitle}
                     initial="hidden"
                     whileInView="visible"
@@ -93,12 +93,21 @@ export default function Footer() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={commonViewport}
-                        className="relative z-20 will-change-[colors,scale] w-full md:max-w-fit px-6 py-3 rounded-sm bg-zinc-50 text-blue-900 font-bold tracking-wide transition-all duration-300 ease-out outline-0 outline-transparent hover:outline-3 hover:outline-blue-700 hover:scale-[1.02] cursor-pointer"
+                        className="
+        relative z-20 w-full md:max-w-fit px-8 py-3 
+        bg-zinc-50 text-neutral-900 font-semibold capitalize tracking-widest
+        border-2 border-blue-700/90
+        transition-all duration-200 ease-in-out
+        hover:-translate-x-1 hover:-translate-y-1
+        hover:shadow-[4px_4px_0px_0px_rgba(29,78,216,1)] 
+        active:translate-x-0 active:translate-y-0 active:shadow-none
+        cursor-pointer
+    "
                     >
                         {t.footer.btn}
                     </motion.button>
 
-                    <motion.div 
+                    <motion.div
                         variants={revealStatus}
                         initial="hidden"
                         whileInView="visible"

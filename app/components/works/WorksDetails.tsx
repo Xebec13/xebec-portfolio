@@ -158,31 +158,37 @@ function Links({ href, gitHref }: { href?: string, gitHref?: string }) {
   if (!href && !gitHref) return null;
 
   return (
-    <div className="text-sm lg:text-base font-medium whitespace-nowrap flex flex-row items-center justify-start gap-1">
+    <div className="text-sm lg:text-base font-medium whitespace-nowrap flex flex-row items-center justify-start gap-2">
       {gitHref && (
         <a
           href={gitHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-pirate"
+          className="relative px-6 py-3 uppercase font-bold tracking-tighter
+    bg-zinc-200 text-neutral-950 
+    border-2 border-neutral-950 
+    transition-all duration-200
+    hover:-translate-x-1 hover:-translate-y-1
+    hover:shadow-[4px_4px_0px_0px_rgba(10,10,10,1)]
+    active:translate-x-0 active:translate-y-0 active:shadow-none"
         >
-          <div className="">
+
           Source Code
-          </div>
+
         </a>
       )}
 
       {href && (
-       <a
-          href={gitHref}
+        <a
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-pirate"
-        >
-          <div className="">
-          Website
-          </div>
-          
+          className="relative px-6 py-3 uppercase font-bold tracking-tighte bg-zinc-200 text-neutral-950 border-2 border-neutral-950 
+                    transition-all duration-200
+                    hover:-translate-x-1 hover:-translate-y-1
+                    hover:shadow-[4px_4px_0px_0px_rgba(10,10,10,1)]
+                    active:translate-x-0 active:translate-y-0 active:shadow-none">
+                      Website
         </a>
       )}
     </div>
@@ -247,7 +253,7 @@ function Carousel({ images }: { images: string[] }) {
       {/* Pasek Nawigacji */}
       <div className="flex items-center justify-center gap-3 md:gap-6 mt-2 md:mt-4 text-zinc-400">
         <PrevChevron onClick={scrollPrev} />
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           {images.map((_, index) => (
             <button
               key={index}

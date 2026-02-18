@@ -18,7 +18,7 @@ interface FormErrors {
 export default function FooterForm() {
     const { t } = useLanguage();
     const formRef = useRef<HTMLFormElement>(null);
-    
+
     // Status wysyłki
     const [status, setStatus] = useState<FormStatus>('idle');
     const [globalError, setGlobalError] = useState("");
@@ -98,7 +98,7 @@ export default function FooterForm() {
 
         // 2. HONEYPOT check
         if (honeypot !== "") {
-            setStatus('success'); 
+            setStatus('success');
             setTimeout(() => setStatus('idle'), 3000);
             return;
         }
@@ -142,8 +142,8 @@ export default function FooterForm() {
         focus:bg-white focus:border-4 focus:border-blue-800
         
        
-        ${errors[fieldName] 
-            ? 'border-red-600 bg-red-50 focus:border-red-600' 
+        ${errors[fieldName]
+            ? 'border-red-600 bg-red-50 focus:border-red-600'
             : 'border-zinc-300'
         }
     `;
@@ -151,7 +151,7 @@ export default function FooterForm() {
     return (
         <section className="flex flex-col items-center justify-center w-full text-neutral-900">
             <form ref={formRef} onSubmit={handleSubmit} noValidate className="w-full flex flex-col gap-5 relative">
-                
+
                 {/* Honeypot */}
                 <div className="opacity-0 absolute top-0 left-0 h-0 w-0 z-[-1] overflow-hidden">
                     <input type="text" name="website_url_check" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
@@ -172,7 +172,7 @@ export default function FooterForm() {
                     />
                     <AnimatePresence>
                         {errors.user_name && (
-                            <motion.p 
+                            <motion.p
                                 initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                                 className="text-red-600 text-xs font-bold absolute left-1 mt-1"
                             >
@@ -195,9 +195,9 @@ export default function FooterForm() {
                         placeholder={t.form.emailPlaceholder}
                         className={getInputClass('user_email')}
                     />
-                     <AnimatePresence>
+                    <AnimatePresence>
                         {errors.user_email && (
-                            <motion.p 
+                            <motion.p
                                 initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                                 className="text-red-600 text-xs font-bold absolute left-1 mt-0.5"
                             >
@@ -220,9 +220,9 @@ export default function FooterForm() {
                         rows={5}
                         className={`${getInputClass('message')} resize-none`}
                     />
-                     <AnimatePresence>
+                    <AnimatePresence>
                         {errors.message && (
-                            <motion.p 
+                            <motion.p
                                 initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                                 className="text-red-600 text-xs font-bold absolute left-1 mt-0.5"
                             >
@@ -249,42 +249,38 @@ export default function FooterForm() {
                     type="submit"
                     disabled={status === 'sending' || status === 'success'}
                     className={`
-                        mt-1
-                        will-change-[colors,scale]
-                            w-full md:max-w-full p-3 lg:p-5
-                            rounded-sm bg-zinc-50
-                            text-blue-900 font-bold tracking-wide
-                            transition-all duration-300 ease-out
-                            outline-0 outline-transparent
-                            hover:outline-3 hover:outline-blue-700 
-                            hover:scale-[1.02] 
-                            cursor-pointer
-                        
-                        ${/* IDLE */ ""}
-                        ${status === 'idle' 
-                            ? "text-blue-900 hover:outline-3 hover:outline-blue-700 hover:scale-[1.01] cursor-pointer" 
+        relative w-full p-4 lg:p-5 
+        capitalize font-semibold tracking-widest text-base
+        border-2 transition-all duration-200 ease-in-out
+        will-change-[colors,transform,shadow]
+        
+        ${/* STAN: IDLE (Podstawowy niebieski) */ ""}
+        ${status === 'idle'
+                            ? "bg-zinc-50 text-neutral-900 border-blue-700 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#1d4ed8] cursor-pointer"
                             : ""}
 
-                        ${/* SENDING */ ""}
-                        ${status === 'sending' 
-                            ? "text-blue-900 opacity-75 cursor-wait scale-100" 
+        ${/* STAN: SENDING (Zablokowany/Neutralny) */ ""}
+        ${status === 'sending'
+                            ? "bg-zinc-100 text-zinc-400 border-zinc-300 cursor-wait translate-x-0 translate-y-0 shadow-none"
                             : ""}
 
-                        ${/* SUCCESS */ ""}
-                        ${status === 'success' 
-                            ? "text-green-700 outline-3 outline-green-600 cursor-default scale-100" 
+        ${/* STAN: SUCCESS (Zielony - twardy sukces) */ ""}
+        ${status === 'success'
+                            ? "bg-zinc-50 text-green-700 border-green-700 shadow-[4px_4px_0px_0px_#15803d] cursor-default -translate-x-0.5 -translate-y-0.5"
                             : ""}
-                        
-                        ${/* ERROR */ ""}
-                        ${status === 'error' 
-                            ? "text-red-700 outline-3 outline-red-600 hover:scale-[1.02] cursor-pointer" 
+        
+        ${/* STAN: ERROR (Czerwony - błąd z możliwością ponowienia) */ ""}
+        ${status === 'error'
+                            ? "bg-zinc-50 text-red-700 border-red-700 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#b91c1c] cursor-pointer"
                             : ""}
-                    `}
+    `}
                 >
-                    {status === 'idle' && t.form.btnSend}
-                    {status === 'sending' && "Sending..."}
-                    {status === 'success' && t.form.successTitle}
-                    {status === 'error' && "Try Again"}
+                    <span className="relative z-10">
+                        {status === 'idle' && t.form.btnSend}
+                        {status === 'sending' && "Sending..."}
+                        {status === 'success' && t.form.successTitle}
+                        {status === 'error' && "Try Again"}
+                    </span>
                 </button>
             </form>
         </section>
