@@ -2,7 +2,7 @@ export type Language = "en" | "pl";
 
 export const GLOBAL = {
   name: "Dawid Hoesen",
-  role: "Front-End Developer",
+  role: "Interactive Developer",
   email: "dhoesen@gmail.com",
   socials: {
     github: "https://github.com/Xebec13",
@@ -62,7 +62,7 @@ const navData: Record<Language, DictionarySchema["nav"]> = {
 };
 
 const heroData: Record<Language, DictionarySchema["hero"]> = {
-  en: { bio: "Hello, I’m passionate about creating clean, responsive, and visually sharp interfaces. \nLet’s create!" },
+  en: { bio: "Hello, I’m passionate about creating clean, responsive, and visually sharp websites. \nLet’s create!" },
   pl: { bio: "Cześć! Projektuję strony minimalistyczne, responsywne i wizualnie dopracowane. \nZróbmy coś razem!" },
 };
 

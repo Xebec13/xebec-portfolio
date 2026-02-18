@@ -30,12 +30,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  // 1. Zmiana nazwy z "DH Portfolio" na Twoją markę osobistą
+ 
   title: {
-    default: "Dawid Hoesen | Creative Front-End Developer",
+    default: "Dawid Hoesen | Interactive Developer",
     template: "%s | Dawid Hoesen",
   },
-  description: "Creative Front-End Developer focused on building high-performance, responsive, and visually sharp web interfaces with React and Next.js.",
+  description: "Projektuję strony minimalistyczne, responsywne i wizualnie dopracowane.",
   metadataBase: new URL("https://dhoesen.pl"),
 
   // 2. Dodanie autora i kanonicznego URL (SEO Best Practices)
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   authors: [{ name: "Dawid Hoesen" }],
 
-  keywords: ["Dawid Hoesen", "Front-End Developer", "React Developer", "Next.js", "TypeScript", "UI/UX Design"],
+  keywords: ["Dawid Hoesen","Interactive Developer", "Front-End Developer", "React Developer","Web Developer", "Next.js", "TypeScript", "UI/UX Design"],
   
   robots: {
     index: true,
@@ -54,10 +54,10 @@ export const metadata: Metadata = {
   // 3. Open Graph z nową nazwą i domeną
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "pl_PL",
     url: "https://dhoesen.pl",
-    title: "Dawid Hoesen | Creative Front-End Developer",
-    description: "Building high-performance, responsive, and visually sharp web interfaces.",
+    title: "Dawid Hoesen | Interactive Developer",
+    description: "Projektuję strony minimalistyczne, responsywne i wizualnie dopracowane.",
     siteName: "Dawid Hoesen",
     images: [
       {
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Dawid Hoesen | Front-End Developer",
+    title: "Dawid Hoesen | Interactive Developer",
     images: ["/opengraph-image.png"],
   },
 
